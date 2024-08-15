@@ -118,7 +118,7 @@ const Dashboard = () => {
               src={profile.image}
               alt="Profile"
             />
-            <p className="text-sm pr-3 sm:text-xl -mt-[1px] sm:-mt-[2px] font-semibold text-white font-suwannaphum">
+            <p className="text-sm pr-3 sm:text-xl -mt-[1px] sm:-mt-[2px] font-semibold font-suwannaphum text-white">
               {profile.username}
             </p>
           </div>

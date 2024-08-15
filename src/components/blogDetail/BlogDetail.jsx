@@ -191,7 +191,7 @@ const BlogDetail = () => {
               </span>
             </div>
             <div className="flex flex-col md:flex-row items-center space-x-3 space-y-2 md:space-y-0 ">
-              <div className="flex ml-60 items-center space-x-2 text-sm md:text-base transition-opacity duration-300 hover:opacity-75"></div>
+              <div className="flex items-center space-x-2 text-sm md:text-base transition-opacity duration-300 hover:opacity-75"></div>
               <div
                 className={`flex items-center text-white space-x-2 py-1 px-2 md:py-2 md:px-4 rounded-xl cursor-pointer transition-all duration-300  ${
                   isFollowing
