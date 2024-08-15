@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchBookById } from "../../services/fetchBookById";
 import { Worker } from "@react-pdf-viewer/core";
-// Import the main component
 import { Viewer } from "@react-pdf-viewer/core";
 import book1 from "../../assets/book1.pdf";
-// Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
@@ -96,13 +94,13 @@ const BookDetail = () => {
 
       <div className="w-full md:w-[35%] flex flex-col gap-8 ">
         {/*  */}
-        <div className="w-full p-4 bg-gray-200 rounded-lg shadow-lg flex items-center gap-4 sticky top-28   ">
-          <img
+        <div className="w-full p-4 bg-gray-200 rounded-lg shadow-sm flex items-center gap-4 sticky top-28   ">
+        <img
             src={
-              profile.imag ||
-              "https://mastertondental.co.nz/wp-content/uploads/2022/12/team-profile-placeholder.jpg"
-            }
-            alt="Profile Image"
+              profile.image ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_JlCFnIGX5omgjEjgV9F3sBRq14eTERK9w&s"
+              }
+          alt="Profile"
             className="w-12 h-12 rounded-full"
           />
           <div className="ml-3 flex flex-col items-start">

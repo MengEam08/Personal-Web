@@ -92,7 +92,7 @@ const BlogCard = () => {
   }, []);
   return (
     <>
-      <section className="flex justify-between mt-5 w-[95%] mx-auto font-suwannaphum mb-7">
+      <section className="flex justify-between mt-5 w-[94%] mx-auto font-suwannaphum mb-7">
         <h3 className="font-bold text-[#16A1DF] text-3xl">ប្លុក</h3>
         <Link to="/blog">
           {" "}
@@ -103,7 +103,7 @@ const BlogCard = () => {
         </Link>
       </section>
       <Link to="/blog">
-        <section className="grid grid-cols-1 h-auto sm:grid-cols-2 lg:grid-cols-4 gap-4  w-[95%] mx-auto mb-5">
+        <section className="grid grid-cols-1 h-auto sm:grid-cols-2 lg:grid-cols-4 gap-4 w-[94%] mx-auto mb-5">
           <div className="border rounded-lg bg-white text-gray-700 shadow-sm h-[430px]">
             <div className="relative h-full w-full overflow-hidden">
               <img
@@ -113,10 +113,10 @@ const BlogCard = () => {
               />
               <div className="absolute inset-0 font-suwannaphum bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
                 <h2 className="text-black text-xl font-suwannaphum text-center font-bold">
-                  ការសិក្សាផ្សេងៗដែលទាក់ទងទៅនិង STEM
+                  ចំណេះដឹងស្ដីពីវិទ្យាសាស្រ្តនិងបច្ចេកវិទ្យា
                   <br />
                   <span className="text-[18px]">
-                    ស្វែងរកសៀវភៅផ្សេងៗដែលទាក់ទងទៅនឹង Technology
+                    រុករកកិច្ចការស្រាវជ្រាវស្តីពីវិទ្យាសាស្រ្តបច្ចេកវិទ្យា
                   </span>
                 </h2>
               </div>
@@ -125,14 +125,14 @@ const BlogCard = () => {
 
           {/* Card1 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden ">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/C++ Programming.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 C++ Programming
               </h4>
@@ -144,17 +144,17 @@ const BlogCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 100 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center text-md">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="w-3 h-3 text-yellow-400"
+                      className="w-3 h-3 text-yellow-400 text-md"
                     >
                       <path
                         fillRule="evenodd"
@@ -169,14 +169,14 @@ const BlogCard = () => {
           </div>
           {/* Card2 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden ">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/Introduct to .Net E.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 Introduction to .NET Core
               </h4>
@@ -188,17 +188,17 @@ const BlogCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 56 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center text-md">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="w-3 h-3 text-yellow-400"
+                      className="w-3 h-3 text-yellow-400 text-md"
                     >
                       <path
                         fillRule="evenodd"
@@ -213,9 +213,9 @@ const BlogCard = () => {
           </div>
           {/* Card3 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden ">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/.NET.jpg"
                 alt=""
               />
@@ -232,7 +232,7 @@ const BlogCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 27 នាក់
                 </p>
                 <div className="flex items-center text-[15px] ">
@@ -242,7 +242,7 @@ const BlogCard = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="w-3 h-3 text-yellow-400"
+                      className="w-3 h-3 text-yellow-400 text-md"
                     >
                       <path
                         fillRule="evenodd"
@@ -274,17 +274,10 @@ const BlogCard = () => {
               <div className="border bg-white text-gray-700 shadow-md rounded-lg">
                 <div className="relative h-[250px] overflow-hidden">
                   <img
-                    className="h-full w-full object-cover rounded-t-md"
+                    className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                     src={book.imgSrc}
                     alt={book.title}
                   />
-                  <div className="absolute inset-0 bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
-                    <h2 className="text-black text-[25px] font-suwannaphum text-center font-bold">
-                      {book.title}
-                      <br />
-                      <span className="text-[18px]">{book.description}</span>
-                    </h2>
-                  </div>
                 </div>
                 <div className="p-3">
                   <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
@@ -296,17 +289,17 @@ const BlogCard = () => {
                 </div>
                 <div className="border-t">
                   <div className="flex items-center justify-between p-3 mt-1">
-                    <p className="font-suwannaphum text-sm text-black">
+                    <p className="font-suwannaphum text-md text-black">
                       ចំនួនអ្នកមេីល: {book.views} នាក់
                     </p>
-                    <div className="flex items-center text-[15px]">
+                    <div className="flex items-center text-md text-[15px]">
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="w-3 h-3 text-yellow-400"
+                          className="w-3 h-3 text-yellow-400 text-md"
                         >
                           <path
                             fillRule="evenodd"

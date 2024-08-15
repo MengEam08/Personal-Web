@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-
 import { AUTH_HEADER } from "../../services/constants";
 import Background from "../../components/background/Background";
 import BookCard from "../../components/bookCard/BookCard";
@@ -34,9 +33,13 @@ const Home = () => {
     }
   };
   return (
-    <div className="w-full h-auto mx-auto bg-gray-50">
+    <div >
       <Background />
       <section className="mt-[10px] m-3">
+      {/* gemini chat AI */}
+      <section className="w-[80%] mx-auto">
+        <GeminiChat />
+      </section>
         <BookCard />
       </section>
       <section className="mt-[10px]">
@@ -45,8 +48,6 @@ const Home = () => {
       <section className="mt-[10px]">
         <ForumCard />
       </section>
-      {/* gemini chat AI */}
-      <GeminiChat className=" absolute left-0 top-3 " />
       <section className="mt-[10px] ">
         <BlogCard />
       </section>

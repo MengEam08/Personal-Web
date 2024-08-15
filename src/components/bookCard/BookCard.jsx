@@ -109,7 +109,7 @@ const BookCard = () => {
           សូមស្វាគមន៍មកកាន់ STEM
         </marquee>
       </nav>
-      {/* Third section */}
+      {/* Slide bar */}
       <section className="relative w-[96%] mx-auto overflow-hidden rounded-lg mb-5 gap-5">
         <div
           className="flex transition-transform  ease-out duration-500"
@@ -121,44 +121,38 @@ const BookCard = () => {
               key={index}
               className="flex-shrink-0 w-[96%] sm:w-1/2 lg:w-1/4 px-2"
             >
-              <div className="border  bg-white text-gray-700 shadow-md rounded-lg">
-                <div className="relative h-[250px] overflow-hidden">
+              <div className="border  bg-white text-gray-700 shadow-md rounded-lg ">
+                <div className="relative h-[250px] overflow-hidden ">
                   <img
-                    className="h-full w-full object-cover rounded-t-md"
+                    className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                     src={book.imgSrc}
                     alt={book.title}
                   />
-                  <div className="absolute inset-0 bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
-                    <h2 className="text-black text-[25px] font-suwannaphum text-center font-bold">
-                      {book.title}
-                      <br />
-                      <span className="text-[18px]">{book.description}</span>
-                    </h2>
-                  </div>
                 </div>
                 <div className="p-3">
-                  <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
+                  <h4 className="block font-suwannaphum text-xl font-semibold leading-snug tracking-normal text-blue-gray-900">
                     {book.title}
                   </h4>
-                  <span className="mt-2 h-[50px] block mb-5  font-suwannaphum  text-l antialiased font-normal leading-relaxed text-gray-700">
+                  <span className="mt-2 h-[50px] block mb-5  font-suwannaphum  text-md antialiased font-normal leading-relaxed text-gray-900">
                     {book.description}
                   </span>
                 </div>
                 <div className="border-t">
                   <div className="flex items-center justify-between p-3 mt-1">
-                    <p className="font-suwannaphum text-sm text-black">
+                    <p className="font-suwannaphum  text-black text-md">
                       ចំនួនអ្នកមេីល: {book.views} នាក់
                     </p>
-                    <div className="flex items-center text-[15px]">
+                    <div className="flex items-center text-lg">
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="w-3 h-3 text-yellow-400"
+                          className="w-3 h-3 text-yellow-400 text-lg"
                         >
                           <path
+                          className="text-lg"
                             fillRule="evenodd"
                             d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
                             clipRule="evenodd"
@@ -188,11 +182,11 @@ const BookCard = () => {
       {/* Bookcard no slide */}
       <Link to="/book">
         <section className="grid grid-cols-1 h-[430px] sm:grid-cols-2 lg:grid-cols-4 gap-4  w-[95%] mx-auto">
-          <div className="border rounded-lg bg-white text-gray-700 shadow-sm ">
-            <div className="relative h-full w-full overflow-hidden">
+          <div className="border rounded-lg bg-white text-gray-700 shadow-sm  transition-transform duration-500 ease-in-out">
+            <div className="relative h-full w-full overflow-hidden ">
               <img
-                className="h-full w-full object-cover opacity-100 transition duration-300 ease-in-out transform scale-100 rounded-t-lg "
-                src="../src/assets/stem_book.jpg"
+                className="h-full w-full object-cover  rounded-t-lg "
+                src="../src/assets/Lesspn_STEM.jpg"
                 alt="Stem Book"
               />
               <div className="absolute inset-0 font-suwannaphum bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
@@ -206,17 +200,16 @@ const BookCard = () => {
               </div>
             </div>
           </div>
-
           {/* Card1 */}
-          <div className="border rounded-lg bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent">
+          <div className="border rounded-lg bg-white text-gray-700 shadow-md h-[430px] ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  w-full object-cover rounded-t-lg"
+                className="h-full w-full object-cover rounded-t-lg hover:scale-110 transition-transform duration-500 ease-linear"
                 src="../src/assets/IOS programming.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4 ">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 IOS Programming 16
               </h4>
@@ -226,11 +219,11 @@ const BookCard = () => {
               </span>
             </div>
             <div className="border-t">
-              <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+              <div className="flex items-center justify-between p-4">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 10 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center ">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
@@ -252,14 +245,14 @@ const BookCard = () => {
           </div>
           {/* Card2 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  w-full object-cover rounded-t-lg"
+                className="h-full w-full object-cover rounded-t-lg hover:scale-110 transition-transform duration-500 ease-linear"
                 src="../src/assets/Python crash course E.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900 ">
                 Python Crash Course
               </h4>
@@ -270,10 +263,10 @@ const BookCard = () => {
             </div>
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 22 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center text-md">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
@@ -295,14 +288,14 @@ const BookCard = () => {
           </div>
           {/* Card3 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-lg hover:scale-110 transition-transform duration-500 ease-linear"
                 src="../src/assets/Mathematic.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 ការណែនាំអំពីគណិតវិទ្យា
               </h4>
@@ -313,7 +306,7 @@ const BookCard = () => {
             </div>
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 27 នាក់
                 </p>
                 <div className="flex items-center text-[15px] ">
