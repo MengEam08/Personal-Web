@@ -157,7 +157,7 @@ const BlogDetail = () => {
       <section className="w-[100%] mx-auto flex flex-col md:flex-row justify-between gap-8 p-8 font-suwannaphum ">
         <div className="w-full h-full">
           <h1 className="text-2xl font-bold mb-4">{blog.title}</h1>
-          <p className="mb-4 text-[16px]">{blog.content}</p>
+          <p className="mb-4 text-[18px]">{blog.content}</p>
           <div className="w-[60%] mx-auto flex justify-center">
             <div>
               <img
