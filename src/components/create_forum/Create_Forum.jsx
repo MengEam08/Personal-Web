@@ -104,7 +104,7 @@ const Create_Forum = () => {
           <form onSubmit={onFormSubmited}>
             <label
               htmlFor="title"
-              className="block text-md leading-6 text-gray-900 font-bold font-suwannaphum" 
+              className="block text-md leading-6 text-gray-900 font-bold font-suwannaphum"
             >
               ចំណងជើង**
             </label>
@@ -125,7 +125,7 @@ const Create_Forum = () => {
               className="text-black"
             />
 
-<div className="col-span-full mt-4">
+            <div className="col-span-full mt-4">
               <label
                 htmlFor="file-upload"
                 className="block text-md font-bold leading-6 text-gray-900 font-suwannaphum"

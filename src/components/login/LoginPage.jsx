@@ -4,7 +4,10 @@ import { API_BASE_URI, AUTH_HEADER } from "../../services/constants";
 import * as Yup from "yup";
 import { CgMail } from "react-icons/cg";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Swal from "sweetalert2"; // Import SweetAlert2 for success alert
+import Swal from "sweetalert2";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import Profile from "../../Profile";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +15,10 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false); // State to track success
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [otp, setOtp] = useState(""); // State for OTP
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -39,23 +45,19 @@ const LoginPage = () => {
         localStorage.setItem("user-info", JSON.stringify(result));
         localStorage.setItem("access_token", result.access);
         AUTH_HEADER.Authorization = `Bearer ${result.access}`;
-        setIsSuccess(true); // Set success state to true
+        setIsSuccess(true);
         await Swal.fire({
           title: "Login Successful",
           text: "You are now logged in.",
           icon: "success",
           confirmButtonText: "OK",
         });
-        navigate("/"); // Redirect after showing the success message
+        navigate("/");
       } else {
         const errorData = await response.json();
-        if (response.status === 401) {
-          setErrorMessage("Invalid email or password. Please try again.");
-        } else {
-          setErrorMessage(
-            errorData.error || "An error occurred. Please try again later."
-          );
-        }
+        setErrorMessage(
+          errorData.error || "An error occurred. Please try again later."
+        );
       }
     } catch (error) {
       setErrorMessage("An error occurred. Please try again later.");
@@ -63,6 +65,76 @@ const LoginPage = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleGoogleLoginSuccess = async (response) => {
+    setUser(response);
+    try {
+      // Register user
+      const registerResponse = await axios.post(
+        "http://136.228.158.126:50001/api/register/",
+        { email: response.profileObj.email }
+      );
+
+      // Assuming the API sends an OTP to the user's email
+      const otpResponse = await axios.post(
+        "http://136.228.158.126:50001/api/verify-otp/",
+        { otp }
+      );
+
+      if (otpResponse.status === 200) {
+        // Log in the user
+        const loginResponse = await axios.post(
+          "http://136.228.158.126:50001/api/login/",
+          { email: response.profileObj.email, otp }
+        );
+
+        localStorage.setItem("user-info", JSON.stringify(loginResponse.data));
+        AUTH_HEADER.Authorization = `Bearer ${loginResponse.data.access_token}`;
+        setProfile(loginResponse.data.profile);
+        setIsSuccess(true);
+        await Swal.fire({
+          title: "Login Successful",
+          text: "You are now logged in.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        navigate("/");
+      } else {
+        await Swal.fire({
+          title: "Verification Failed",
+          text: "OTP verification failed. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.error("Google Login Failed:", error);
+      Swal.fire({
+        title: "Login Failed",
+        text: "Something went wrong. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: handleGoogleLoginSuccess,
+    onError: (error) => {
+      console.log("Login Failed:", error);
+      Swal.fire({
+        title: "Login Failed",
+        text: "Google login failed. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    },
+  });
+
+  const logOut = () => {
+    googleLogout();
+    setProfile();
   };
 
   return (
@@ -75,7 +147,6 @@ const LoginPage = () => {
                 <h3 className="text-blue-700 text-3xl font-extrabold text-center">
                   You have successfully logged in!
                 </h3>
-                {/* Additional content or redirection */}
               </div>
             </div>
           </div>
@@ -100,7 +171,6 @@ const LoginPage = () => {
                       </Link>
                     </p>
                   </div>
-
 
                   <div>
                     <label className="text-gray-800 text-[18px] block mb-2">
@@ -170,6 +240,13 @@ const LoginPage = () => {
                     disabled={isLoading}
                   >
                     {isLoading ? "Logging in..." : "បញ្ចូល"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => login()}
+                    className="w-full bg-red-700 text-white py-2 rounded-[15px] font-semibold text-[14px] shadow-sm hover:bg-red-600 transition-all duration-300 ease-in-out mt-4"
+                  >
+                    Login with Google
                   </button>
                 </form>
               </div>

@@ -93,7 +93,7 @@ const LessonCard = () => {
 
   return (
     <>
-      <section className="flex justify-between mt-5 w-[95%] mx-auto font-suwannaphum mb-4">
+      <section className="flex justify-between mt-5 w-[94%] mx-auto font-suwannaphum mb-4">
         <h3 className="font-bold text-[#16A1DF] text-3xl">មេរៀន</h3>
         <Link to="/lesson">
           <span className="flex items-center text-black text-[20px]">
@@ -118,17 +118,11 @@ const LessonCard = () => {
               <div className="border bg-white text-gray-700 shadow-md rounded-lg">
                 <div className="relative h-[250px] overflow-hidden">
                   <img
-                    className="h-full w-full object-cover rounded-t-md"
+                    className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                     src={book.imgSrc}
                     alt={book.title}
                   />
-                  <div className="absolute inset-0 bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
-                    <h2 className="text-black text-[25px] font-suwannaphum text-center font-bold">
-                      {book.title}
-                      <br />
-                      <span className="text-[18px]">{book.description}</span>
-                    </h2>
-                  </div>
+                  
                 </div>
                 <div className="p-3">
                   <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
@@ -140,7 +134,7 @@ const LessonCard = () => {
                 </div>
                 <div className="border-t">
                   <div className="flex items-center justify-between p-3 mt-1">
-                    <p className="font-suwannaphum text-sm text-black">
+                    <p className="font-suwannaphum text-md text-black">
                       ចំនួនអ្នកមេីល: {book.views} នាក់
                     </p>
                     <div className="flex items-center text-[15px]">
@@ -150,7 +144,7 @@ const LessonCard = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="w-3 h-3 text-yellow-400"
+                          className="w-3 h-3 text-yellow-400 text-md"
                         >
                           <path
                             fillRule="evenodd"
@@ -182,20 +176,20 @@ const LessonCard = () => {
 
       {/* second section */}
       <Link to="/lesson">
-        <section className="grid grid-cols-1 h-[430px] sm:grid-cols-2 lg:grid-cols-4 gap-4  w-[95%] mx-auto">
+        <section className="grid grid-cols-1 h-[430px] sm:grid-cols-2 lg:grid-cols-4 gap-4  w-[94%] mx-auto">
         <div className="border rounded-lg bg-white text-gray-700 shadow-sm ">
             <div className="relative h-full w-full overflow-hidden">
               <img
                 className="h-full w-full object-cover opacity-100 transition duration-300 ease-in-out transform scale-100 rounded-t-lg "
-                src="../src/assets/stem_book.jpg"
+                src="../src/assets/Lesson.webp"
                 alt="Stem Book"
               />
               <div className="absolute inset-0 font-suwannaphum bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
                 <h2 className="text-black text-[25px] font-suwannaphum text-center font-bold">
-                  ការសិក្សាផ្សេងៗដែលទាក់ទងទៅនិង STEM
+                  ការសិក្សាវីដេអូដែលទាក់ទងនឹង STEM
                   <br />
                   <span className="text-[18px]">
-                    ស្វែងរកសៀវភៅផ្សេងៗដែលទាក់ទងទៅនឹង Technology
+                    ស្វែងរកវីដេអូផ្សេងៗដែលទាក់ទងនឹង Technology
                   </span>
                 </h2>
               </div>
@@ -204,9 +198,9 @@ const LessonCard = () => {
 
           {/* Card1 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/Photoshop Basics.jpg"
                 alt=""
               />
@@ -223,7 +217,7 @@ const LessonCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 100 នាក់
                 </p>
                 <div className="flex items-center text-[15px] ">
@@ -233,7 +227,7 @@ const LessonCard = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                     className="w-3 h-3 text-yellow-400"
+                     className="w-3 h-3 text-yellow-400 text-md"
                     >
                       <path
                         fillRule="evenodd"
@@ -248,14 +242,14 @@ const LessonCard = () => {
           </div>
           {/* Card2 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/Logic for kid E.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 Ask A Scientist
               </h4>
@@ -267,17 +261,17 @@ const LessonCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 56 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center text-md">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="w-3 h-3 text-yellow-400"
+                      className="w-3 h-3 text-yellow-400 text-md"
                     >
                       <path
                         fillRule="evenodd"
@@ -292,14 +286,14 @@ const LessonCard = () => {
           </div>
           {/* Card3 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/The simple science activity E.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 The Science Activity
               </h4>
@@ -311,7 +305,7 @@ const LessonCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 27 នាក់
                 </p>
                 <div className="flex items-center text-[15px] ">
@@ -321,7 +315,7 @@ const LessonCard = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                     className="w-3 h-3 text-yellow-400"
+                     className="w-3 h-3 text-yellow-400 text-md"
                     >
                       <path
                         fillRule="evenodd"

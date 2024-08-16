@@ -28,7 +28,8 @@ import PostArticlePage from "./page/postArticlePage/PostArticlePage";
 import GetForumPage from "./page/getForumPage/GetForumPage";
 import EditArticlePage from "./page/editArticlePage/EditArticlePage";
 import EditForumPage from "./page/editForumPage/EditForumPage";
-import GeminiChat from "./components/gemini/gemini";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const router = createBrowserRouter([
   {
@@ -75,7 +76,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <GoogleOAuthProvider clientId="1071896170769-iv3ggmiq41d1jsfe723tk81dkauv2fp1.apps.googleusercontent.com">
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </GoogleOAuthProvider>
 );

@@ -92,7 +92,7 @@ const ForumCard = () => {
   }, []);
   return (
     <>
-      <section className="flex justify-between mt-5 w-[95%] mx-auto font-suwannaphum mb-5">
+      <section className="flex justify-between mt-5 w-[94%] mx-auto font-suwannaphum mb-5">
         <h3 className="font-bold text-[#16A1DF] text-3xl ">វេទិកា</h3>
         <Link to="/forum">
           <span className="flex items-center text-black text-[20px]">
@@ -102,7 +102,7 @@ const ForumCard = () => {
         </Link>
       </section>
       <Link to="/forum">
-        <section className="grid grid-cols-1 h-auto sm:grid-cols-2 lg:grid-cols-4 gap-4  w-[95%] mx-auto mb-5">
+        <section className="grid grid-cols-1 h-auto sm:grid-cols-2 lg:grid-cols-4 gap-4  w-[94%] mx-auto mb-5">
           <div className="border rounded-lg bg-white text-gray-700 shadow-sm h-[430px]">
             <div className="relative h-full w-full overflow-hidden">
               <img
@@ -111,27 +111,27 @@ const ForumCard = () => {
                 alt="Stem Book"
               />
               <div className="absolute inset-0 font-suwannaphum bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
-                <h2 className="text-black text-[25px] font-suwannaphum text-center font-bold">
-                  ការសិក្សាផ្សេងៗដែលទាក់ទងទៅនិង STEM
-                  <br />
-                  <span className="text-[18px]">
-                    ស្វែងរកសៀវភៅផ្សេងៗដែលទាក់ទងទៅនឹង Technology
-                  </span>
-                </h2>
-              </div>
+                  <h2 className="text-black text-[20px] font-suwannaphum text-center font-bold">
+                      ចែករំលែកដំណឹងទាក់ទងទៅនិង STEM
+                      <br />
+                      <span className="text-[18px]">
+                          ស្វែងរកអត្ថបទផ្សេងៗដែលទាក់ទងទៅនឹងវិទ្យាសាស្រ្ត និងបច្ចេកវិទ្យា
+                      </span>
+                  </h2>
+                </div>
             </div>
           </div>
 
           {/* Card1 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/chamistry of products.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 Chemistry of Products
               </h4>
@@ -143,17 +143,17 @@ const ForumCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 100 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center text-md">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="w-3 h-3 text-yellow-400"
+                      className="w-3 h-3 text-yellow-400 text-md"
                     >
                       <path
                         fillRule="evenodd"
@@ -168,14 +168,14 @@ const ForumCard = () => {
           </div>
           {/* Card2 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px]  rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/From Batch to Stream.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 From Batch to Stream
               </h4>
@@ -187,10 +187,10 @@ const ForumCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 56 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center text-md">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
@@ -212,14 +212,14 @@ const ForumCard = () => {
           </div>
           {/* Card3 */}
           <div className="border rounded-xl bg-white text-gray-700 shadow-md h-[430px]">
-            <div className="bg-transparent ">
+            <div className="relative h-[250px] overflow-hidden">
               <img
-                className="h-[250px] rounded-t-lg w-full object-cover"
+                className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                 src="../src/assets/Machine Learning.jpg"
                 alt=""
               />
             </div>
-            <div className="p-3 mb-5">
+            <div className="p-3 mb-4">
               <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
                 Machine Learning
               </h4>
@@ -231,10 +231,10 @@ const ForumCard = () => {
 
             <div className="border-t">
               <div className="flex items-center justify-between p-3 mt-1">
-                <p className="font-suwannaphum text-sm text-black ">
+                <p className="font-suwannaphum text-md text-black ">
                   ចំនួនអ្នកមេីល: 27 នាក់
                 </p>
-                <div className="flex items-center text-[15px] ">
+                <div className="flex items-center text-md">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
@@ -271,17 +271,10 @@ const ForumCard = () => {
                 <div className="border bg-white text-gray-700 shadow-md rounded-lg">
                   <div className="relative h-[250px] overflow-hidden">
                     <img
-                      className="h-full w-full object-cover rounded-t-md"
+                      className="h-full w-full object-cover rounded-t-md  hover:scale-105 transition-transform duration-500 ease-in-out"
                       src={book.imgSrc}
                       alt={book.title}
                     />
-                    <div className="absolute inset-0 bg-transparent hover:bg-slate-300 opacity-0 hover:opacity-60 transition-opacity duration-300 ease-in-out flex items-center justify-center">
-                      <h2 className="text-black text-[25px] font-suwannaphum text-center font-bold">
-                        {book.title}
-                        <br />
-                        <span className="text-[18px]">{book.description}</span>
-                      </h2>
-                    </div>
                   </div>
                   <div className="p-3">
                     <h4 className="block font-suwannaphum text-xl font-bold leading-snug tracking-normal text-blue-gray-900">
@@ -293,17 +286,17 @@ const ForumCard = () => {
                   </div>
                   <div className="border-t">
                     <div className="flex items-center justify-between p-3 mt-1">
-                      <p className="font-suwannaphum text-sm text-black">
+                      <p className="font-suwannaphum text-md text-black">
                         ចំនួនអ្នកមេីល: {book.views} នាក់
                       </p>
-                      <div className="flex items-center text-[15px]">
+                      <div className="flex items-center text-md">
                         {[...Array(5)].map((_, i) => (
                           <svg
                             key={i}
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             fill="currentColor"
-                            className="w-3 h-3 text-yellow-400"
+                            className="w-3 h-3 text-yellow-400 text-md"
                           >
                             <path
                               fillRule="evenodd"

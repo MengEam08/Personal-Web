@@ -3,7 +3,6 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Card, TextInput, Button, Dropdown, Modal, Spinner, Textarea } from 'flowbite-react';
 import { HiOutlinePaperAirplane, HiX } from 'react-icons/hi'; // Import HiX for the close icon
 import "../../App.css";
-
 // GeminiChat Component
 function GeminiChat({ language, handleLanguageChange, onClose }) {
   const [messages, setMessages] = useState([
@@ -54,7 +53,6 @@ function GeminiChat({ language, handleLanguageChange, onClose }) {
           ...prevMessages,
           { sender: 'bot', text: '' },
         ]);
-
         typeMessage(text);
       } catch (error) {
         console.error(error);
@@ -64,7 +62,6 @@ function GeminiChat({ language, handleLanguageChange, onClose }) {
       }
     }
   };
-
   useEffect(() => {
     return () => {
       if (typingRef.current) {
@@ -127,8 +124,57 @@ function GeminiChat({ language, handleLanguageChange, onClose }) {
               >
                 Suoml
               </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('DE')}
+              >
+                Deutsch
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('ES')}
+              >
+                Español
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('JA')}
+              >
+                日本語 (Japanese)
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('ZH')}
+              >
+                中文 (Chinese)
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('RU')}
+              >
+                Русский (Russian)
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('AR')}
+              >
+                العربية (Arabic)
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('PT')}
+              >
+                Português (Portuguese)
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="hover:bg-slate-300 active:bg-slate-400"
+                onClick={() => handleLanguageChange('HI')}
+              >
+                हिन्दी (Hindi)
+              </Dropdown.Item>
             </Dropdown>
           </section>
+
         </div>
       </header>
 

@@ -42,14 +42,18 @@ export default function CardForum({ forums }) {
             </p>
           </div>
         </div>
-        <h2 className="card-title" dangerouslySetInnerHTML={{ __html: forums.title || "No title" }}>
-        </h2>
+        <h2
+          className="card-title"
+          dangerouslySetInnerHTML={{ __html: forums.title || "No title" }}
+        ></h2>
         <p
           className={`text-base text-gray-700 font-suwannaphum ${
             isExpanded ? "" : "line-clamp-2"
-          }`}  dangerouslySetInnerHTML={{ __html: forums.description || "No description" }}
-        >
-        </p>
+          }`}
+          dangerouslySetInnerHTML={{
+            __html: forums.description || "No description",
+          }}
+        ></p>
         <button
           onClick={handleToggle}
           className="mt-2 text-indigo-600 hover:underline focus:outline-none text-sm"

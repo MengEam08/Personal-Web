@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import Dashboard from "../../components/dashboard/Dashboard";
 import { Link, useSearchParams } from "react-router-dom";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 const GetForum = () => {
   const [search, setSearch] = useState("");
@@ -12,6 +13,7 @@ const GetForum = () => {
   const [totalRows, setTotalRows] = useState(0);
   const [checkAllPages, setCheckAllPages] = useState(false);
   const [param] = useSearchParams(); // Used for initial data fetch based on URL params
+
   const columns = [
     {
       name: "ID",
@@ -36,7 +38,10 @@ const GetForum = () => {
       selector: (row) => row.title,
       sortable: true,
       cell: (row) => (
-        <span className="text-lg line-clamp-2 font-suwannaphum" dangerouslySetInnerHTML={{ __html: row.title || "No title" }}></span>
+        <span
+          className="text-lg line-clamp-2 font-suwannaphum"
+          dangerouslySetInnerHTML={{ __html: row.title || "No title" }}
+        ></span>
       ),
     },
     {
@@ -44,7 +49,12 @@ const GetForum = () => {
       selector: (row) => row.description,
       sortable: true,
       cell: (row) => (
-        <span className="text-lg line-clamp-2 font-suwannaphum" dangerouslySetInnerHTML={{ __html: row.description || "No description" }}></span>
+        <span
+          className="text-lg line-clamp-2 font-suwannaphum"
+          dangerouslySetInnerHTML={{
+            __html: row.description || "No description",
+          }}
+        ></span>
       ),
     },
     {
@@ -52,7 +62,11 @@ const GetForum = () => {
       selector: (row) => row.image,
       sortable: true,
       cell: (row) => (
-        <img src={row.image} alt={row.title} className="w-16 h-16 object-cover" />
+        <img
+          src={row.image}
+          alt={row.title}
+          className="w-16 h-16 object-cover"
+        />
       ),
     },
     {
@@ -68,49 +82,131 @@ const GetForum = () => {
     {
       name: "Actions",
       cell: (row) => (
-        <div className="flex flex-col gap-1">
-          <Link
-            to={`/editForum/${row.id}`}
-            className="bg-green-500 text-sm px-3 py-1 rounded-lg text-center md:px-4 md:py-2"
-          >
-            Edit
-          </Link>
+        <div className="relative flex items-center justify-end">
           <button
-            onClick={() => handleDelete(row.id)}
-            className="bg-red-600 text-sm px-3 py-1 rounded-lg text-center md:px-4 md:py-2"
+            onClick={() => handleDropdownToggle(row.id)}
+            className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+            type="button"
           >
-            Delete
+            <svg
+              className="w-5 h-5"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+            </svg>
           </button>
+          <div
+            id={`dropdown-menu-${row.id}`}
+            className="absolute right-0 z-10 hidden w-44 bg-white rounded-;g divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 mt-[150px]"
+          >
+            <ul className="py-1  text-gray-700 dark:text-gray-200 font-suwannaphum text-lg">
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  បង្ហាញ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  onClick={() => handleDelete(row.id)}
+                >
+                  លុប
+                </a>
+              </li>
+              <li>
+                <Link
+                  to={`/editForum/${row.id}`}
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  កែរប្រែ
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       ),
     },
+    // {
+    //   name: "Actions",
+    //   cell: (row) => (
+    //     <div className="flex flex-col gap-1">
+    //       <Link
+    //         to={`/editForum/${row.id}`}
+    //         className="bg-green-500 text-sm px-3 py-1 rounded-lg text-center md:px-4 md:py-2"
+    //       >
+    //         Edit
+    //       </Link>
+    //       <button
+    //         onClick={() => handleDelete(row.id)}
+    //         className="bg-red-600 text-sm px-3 py-1 rounded-lg text-center md:px-4 md:py-2"
+    //       >
+    //         Delete
+    //       </button>
+    //     </div>
+    //   ),
+    // },
   ];
-
+  const handleDropdownToggle = (id) => {
+    const menu = document.getElementById(`dropdown-menu-${id}`);
+    menu.classList.toggle("hidden");
+  };
   const handleDelete = async (id) => {
     try {
-      const accessToken = localStorage.getItem("access_token");
-      if (!accessToken) {
-        throw new Error("No access token found");
-      }
-
-      const response = await fetch(`http://136.228.158.126:50001/api/forums/${id}/`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+      // Show confirmation dialog
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to delete article");
-      }
+      if (result.isConfirmed) {
+        const accessToken = localStorage.getItem("access_token");
+        if (!accessToken) {
+          throw new Error("No access token found");
+        }
 
-      // Remove the deleted article from the current data set
-      const updatedData = data.filter((item) => item.id !== id);
-      setData(updatedData);
-      setFilteredData(updatedData);
-      setTotalRows(totalRows - 1);
+        const response = await fetch(
+          `http://136.228.158.126:50001/api/forums/${id}/`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to delete article");
+        }
+
+        // Remove the deleted article from the current data set
+        const updatedData = data.filter((item) => item.id !== id);
+        setData(updatedData);
+        setFilteredData(updatedData);
+        setTotalRows(totalRows - 1);
+
+        // Show success message
+        Swal.fire("Deleted!", "Your forum post has been deleted.", "success");
+      }
     } catch (error) {
       console.error("Error deleting article:", error);
+      Swal.fire(
+        "Error!",
+        "There was an issue deleting the forum post.",
+        "error"
+      );
     }
   };
 
@@ -121,11 +217,14 @@ const GetForum = () => {
         throw new Error("No access token found");
       }
 
-      const response = await fetch(`http://136.228.158.126:50001/api/forums/?page=${currentPage}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `http://136.228.158.126:50001/api/forums/?page=${currentPage}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");

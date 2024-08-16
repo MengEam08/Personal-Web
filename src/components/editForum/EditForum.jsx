@@ -12,6 +12,7 @@ const EditForum = () => {
   });
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
     // Fetch the forum data by ID
@@ -34,9 +35,16 @@ const EditForum = () => {
 
         const data = await response.json();
         setForumData(data);
+        if (data.image) {
+          setPreviewImage(data.image);
+        }
       } catch (error) {
         console.error("Error fetching forum data:", error);
-        Swal.fire("Error", "Failed to fetch forum data. Please try again.", "error");
+        Swal.fire(
+          "Error",
+          "Failed to fetch forum data. Please try again.",
+          "error"
+        );
       } finally {
         setLoading(false);
       }
@@ -54,7 +62,11 @@ const EditForum = () => {
   };
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const file = e.target.files[0];
+    setFile(file);
+    if (file) {
+      setPreviewImage(URL.createObjectURL(file));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -86,7 +98,11 @@ const EditForum = () => {
         imageUrl = uploadResult.url; // Extract URL from the response
       } catch (error) {
         console.error("Error uploading image:", error);
-        Swal.fire("Error", "Failed to upload image. Please try again.", "error");
+        Swal.fire(
+          "Error",
+          "Failed to upload image. Please try again.",
+          "error"
+        );
         setLoading(false);
         return;
       }
@@ -120,63 +136,119 @@ const EditForum = () => {
       }
     } catch (error) {
       console.error("Error updating forum data:", error);
-      Swal.fire("Error", "Failed to update forum data. Please try again.", "error");
+      Swal.fire(
+        "Error",
+        "Failed to update forum data. Please try again.",
+        "error"
+      );
     } finally {
       setLoading(false);
     }
   };
 
+  const handleCancel = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Any unsaved changes will be lost!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, close it!",
+      cancelButtonText: "No, stay here",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/getforum"); // Redirect if confirmed
+      }
+    });
+  };
+
   return (
-    <div className="container mx-auto p-4 font-suwannaphum bg-[#15A1DF] mt-10 rounded-lg">
-      <div className="text-2xl font-bold mb-4 text-black text-center mx-auto">
-        Edit Forum Post
+    <div className="container mx-auto p-4 font-suwannaphum bg-white dark:bg-gray-900 mt-10 rounded-lg w-[80%] shadow-extra">
+      <div className="text-[25px] font-bold mb-4 text-black text-center mx-auto">
+        កែប្រែសំណួរ
       </div>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={forumData.title}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Description</label>
-          <textarea
-            name="description"
-            value={forumData.description}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Image</label>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            className="w-full px-3 py-2 border rounded"
-          />
-          {forumData.image && (
-            <div className="mt-2">
-              <img
-                src={forumData.image}
-                alt="Forum"
-                className="w-32 h-32 object-cover"
-              />
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="w-full md:w-1/2">
+            <label className="block">ចំណងជើង</label>
+            <input
+              placeholder="សូមធ្វើការសរសេរកែប្រែនៅចំណងជើងអ្នក......"
+              type="text"
+              name="title"
+              value={forumData.title}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border-gray-300 rounded-lg bg-gray-50"
+              required
+            />
+            <label className="block mt-4">សេចក្តីលំអិត</label>
+            <textarea
+              name="description"
+              placeholder="សូមធ្វើការសរសេរកែប្រែនៅសេចក្តីលំអិតរបស់អ្នក......"
+              value={forumData.description}
+              onChange={handleChange}
+              className="w-full h-[500px] px-3 py-2 border-gray-300 rounded-lg bg-gray-50"
+              required
+            />
+          </div>
+          <div className="w-full md:w-1/2 border-gray-300">
+            <label className="inline-block">រូបភាព</label>
+            <div className="rounded-lg shadow-xl bg-gray-50">
+              <div className="flex items-center justify-center w-full">
+                <label className="border-gray-300 flex m-5 flex-col w-full h-32 border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                  <div className="flex flex-col items-center justify-center pt-7 border-gray-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-12 h-12 text-gray-400 group-hover:text-gray-600 border-gray-300"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <p className="pt-1 text-lg tracking-wider font-suwannaphum group-hover:text-gray-600">
+                      សូមជ្រើសរើសរូបភាព
+                    </p>
+                  </div>
+                  <input
+                    type="file"
+                    className="opacity-0 border-gray-300 rounded-lg bg-gray-50"
+                    onChange={handleFileChange}
+                  />
+                </label>
+              </div>
             </div>
-          )}
+            {previewImage && (
+              <div className="mt-2">
+                <img
+                  src={previewImage}
+                  alt="Preview"
+                  className="w-full h-auto object-cover rounded-lg"
+                  style={{ maxWidth: "700px" }}
+                />
+              </div>
+            )}
+          </div>
         </div>
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded"
-          disabled={loading}
-        >
-          {loading ? 'Submitting...' : 'Submit'}
-        </button>
+        <div className="flex items-center space-x-4">
+          <button
+            type="submit"
+            className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            disabled={loading}
+          >
+            {loading ? "រក្សាទុក្ខ..." : "រក្សាទុក្ខ"}
+          </button>
+          <button
+            type="button"
+            className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+            onClick={handleCancel}
+          >
+            បោះបង់
+          </button>
+        </div>
       </form>
     </div>
   );

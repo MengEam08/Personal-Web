@@ -44,7 +44,7 @@ const PostArticle = () => {
         icon: "success",
         confirmButtonText: "OK",
       }).then(() => {
-        navigate("/");
+        navigate("/article");
       });
     } catch (error) {
       console.error(error);
