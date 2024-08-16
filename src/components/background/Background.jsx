@@ -32,7 +32,7 @@ const Statistics = () => {
   return (
     <div className="flex justify-around font-suwannaphum w-full text-center mt-8 m-5">
       <div className="font-suwannaphum">
-        <CountUp end={33030} className="font-suwannaphum"/>
+        <CountUp end={830} className="font-suwannaphum"/>
         <span className="text-white text-3xl font-suwannaphum font-bold">សៀវភៅ</span>
       </div>
       <div className="font-suwannaphum">
