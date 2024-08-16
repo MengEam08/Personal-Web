@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button, Label, TextInput } from "flowbite-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -24,16 +24,18 @@ const RegisterPage = () => {
       first_name: Yup.string().required("First name is required"),
       last_name: Yup.string().required("Last name is required"),
       username: Yup.string().required("Username is required"),
-      email: Yup.string().email("Invalid email address").required("Email is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
       password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
-        "Password must contain one uppercase, one lowercase, one number, and one special case character"
-      )
-      .required("Password is required"),
+        .min(6, "Password must be at least 6 characters")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
+          "Password must contain one uppercase, one lowercase, one number, and one special case character"
+        )
+        .required("Password is required"),
       confirm_password: Yup.string()
-        .oneOf([Yup.ref('password'), null], "Passwords must match")
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
         .required("Confirm password is required"),
     }),
     onSubmit: async (values) => {
@@ -44,15 +46,30 @@ const RegisterPage = () => {
         );
 
         if (response.status === 201) {
-          alert("Account has been created successfully.");
-          navigate("/otp");
+          Swal.fire({
+            title: "Success!",
+            text: "Account has been created successfully.",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then(() => {
+            navigate("/otp");
+          });
         } else {
-          // Handle potential API-specific error messages:
-          alert(response.data.message || "Registration failed.");
+          Swal.fire({
+            title: "Registration Failed",
+            text: response.data.message || "Registration failed.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         }
       } catch (error) {
         console.error(error);
-        alert(error.message || "An error occurred while submitting the form.");
+        Swal.fire({
+          title: "Error",
+          text: error.message || "An error occurred while submitting the form.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     },
   });
@@ -71,7 +88,10 @@ const RegisterPage = () => {
             </h3>
             <div className="space-y-3">
               <div>
-                <label className="text-[20px] font-suwannaphum" htmlFor="first_name">
+                <label
+                  className="text-[20px] font-suwannaphum"
+                  htmlFor="first_name"
+                >
                   នាមត្រកូល
                 </label>
                 <input
@@ -85,12 +105,17 @@ const RegisterPage = () => {
                   placeholder="បញ្ចូលនាមត្រកូល"
                 />
                 {formik.touched.first_name && formik.errors.first_name ? (
-                  <div className="text-red-600 text-sm">{formik.errors.first_name}</div>
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.first_name}
+                  </div>
                 ) : null}
               </div>
 
               <div>
-                <label className="text-[20px] font-suwannaphum" htmlFor="last_name">
+                <label
+                  className="text-[20px] font-suwannaphum"
+                  htmlFor="last_name"
+                >
                   នាមខ្លួន
                 </label>
                 <input
@@ -104,12 +129,17 @@ const RegisterPage = () => {
                   placeholder="បញ្ចូលនាមខ្លួន"
                 />
                 {formik.touched.last_name && formik.errors.last_name ? (
-                  <div className="text-red-600 text-sm">{formik.errors.last_name}</div>
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.last_name}
+                  </div>
                 ) : null}
               </div>
 
               <div>
-                <label className="text-[20px] font-suwannaphum" htmlFor="username">
+                <label
+                  className="text-[20px] font-suwannaphum"
+                  htmlFor="username"
+                >
                   ឈ្មោះ
                 </label>
                 <input
@@ -123,7 +153,9 @@ const RegisterPage = () => {
                   placeholder="បញ្ចូលឈ្មោះ"
                 />
                 {formik.touched.username && formik.errors.username ? (
-                  <div className="text-red-600 text-sm">{formik.errors.username}</div>
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.username}
+                  </div>
                 ) : null}
               </div>
               <div className="relative">
@@ -144,12 +176,17 @@ const RegisterPage = () => {
                   <CgMail className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-900" />
                 </div>
                 {formik.touched.email && formik.errors.email ? (
-                  <div className="text-red-600 text-sm">{formik.errors.email}</div>
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.email}
+                  </div>
                 ) : null}
               </div>
 
               <div className="relative mt-3">
-                <label className="text-[20px] font-suwannaphum" htmlFor="password">
+                <label
+                  className="text-[20px] font-suwannaphum"
+                  htmlFor="password"
+                >
                   លេខសម្ងាត់
                 </label>
                 <div className="relative mt-3">
@@ -167,16 +204,21 @@ const RegisterPage = () => {
                     className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-800 cursor-pointer"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ?  <FaEye /> : <FaEyeSlash />  }
+                    {showPassword ? <FaEye /> : <FaEyeSlash />}
                   </div>
                 </div>
                 {formik.touched.password && formik.errors.password ? (
-                  <div className="text-red-600 text-sm">{formik.errors.password}</div>
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.password}
+                  </div>
                 ) : null}
               </div>
 
               <div className="relative mt-3">
-                <label className="text-[20px] font-suwannaphum" htmlFor="confirm_password">
+                <label
+                  className="text-[20px] font-suwannaphum"
+                  htmlFor="confirm_password"
+                >
                   បញ្ចាក់ពាក្យសម្ងាត់
                 </label>
                 <div className="relative mt-3">
@@ -188,7 +230,7 @@ const RegisterPage = () => {
                     value={formik.values.confirm_password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    placeholder="Confirm your password"
+                    placeholder="បញ្ចាក់ពាក្យសម្ងាត់"
                   />
                   <div
                     className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-800 cursor-pointer"
@@ -197,60 +239,28 @@ const RegisterPage = () => {
                     {showConfirmPassword ? <FaEye /> : <FaEyeSlash />}
                   </div>
                 </div>
-                {formik.touched.confirm_password && formik.errors.confirm_password ? (
-                  <div className="text-red-600 text-sm">{formik.errors.confirm_password}</div>
+                {formik.touched.confirm_password &&
+                formik.errors.confirm_password ? (
+                  <div className="text-red-600 text-sm">
+                    {formik.errors.confirm_password}
+                  </div>
                 ) : null}
               </div>
 
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 shrink-0 border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-3 block text-sm text-gray-800"
+              <div className="w-full flex justify-center items-center">
+                <button
+                  type="submit"
+                  className="w-full lg:max-w-[100px] bg-blue-600 text-white rounded-[10px] text-lg font-bold mt-3 py-2 transition-all"
                 >
-                  ខ្ញុំទទួលយក{" "}
-                  <a
-                    href="javascript:void(0);"
-                    className="text-blue-600 font-semibold hover:underline ml-1"
-                  >
-                    ខ្ញុំទទួលយកលក្ខខណ្ឌ
-                  </a>
-                </label>
+                  កត់ត្រា
+                </button>
               </div>
             </div>
-
-            <div className="mt-12">
-              <button
-                type="submit"
-                disabled={formik.isSubmitting}
-                className="w-full shadow-xl py-2.5 px-4 text-sm tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-              >
-                {formik.isSubmitting ? "Submitting..." : "បង្កើតគណនី"}
-              </button>
-            </div>
-
-            <p className="text-sm text-gray-800 mt-6 font-suwannaphum">
-              មានគណនីហើយមែនទេ?{" "}
-              <a
-                href="/login"
-                className="text-blue-600 font-semibold hover:underline ml-1 font-suwannaphum"
-              >
-                ចូលគណនី
-              </a>
-            </p>
           </form>
-          <img
-            src="../src/assets/Sign up (3).gif"
-            className="h-full w-full max-lg:mt-12 object-cover"
-            autoPlay
-            loop
-            muted
-          />
+
+          <div className="flex items-center justify-center">
+            <img src="../src/assets/Sign up (3).gif" alt="register" />
+          </div>
         </div>
       </div>
     </div>
