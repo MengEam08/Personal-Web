@@ -3,7 +3,12 @@ import DataTable from "react-data-table-component";
 import Dashboard from "../../components/dashboard/Dashboard";
 import { Link, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2"; // Import SweetAlert2
+import { FaEye } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+import { MdOutlineDisabledByDefault } from "react-icons/md";
 import "./data.css";
+// import { selector } from "gsap";
 const Article = () => {
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -13,7 +18,13 @@ const Article = () => {
   const [totalRows, setTotalRows] = useState(0);
   const [param, setParam] = useSearchParams();
   const [checkAllPages, setCheckAllPages] = useState(false);
-
+  const handleClose = (id) => {
+    const menu = document.getElementById(`dropdown-menu-${id}`);
+    if (menu) {
+      menu.classList.add("hidden"); // Hide the dropdown menu
+    }
+  };
+  
   const columns = [
     {
       name: "ID",
@@ -38,8 +49,7 @@ const Article = () => {
       selector: (row) => row.title,
       sortable: true,
       cell: (row) => (
-        <span className="text-lg line-clamp-2 font-suwannaphum">
-          {row.title}
+        <span className="text-lg line-clamp-2 font-suwannaphum"  dangerouslySetInnerHTML={{ __html: row.title || "No title" }}>
         </span>
       ),
     },
@@ -48,8 +58,10 @@ const Article = () => {
       selector: (row) => row.content,
       sortable: true,
       cell: (row) => (
-        <span className="text-lg line-clamp-2 font-suwannaphum">
-          {row.content}
+        <span className="text-lg line-clamp-2 font-suwannaphum"  dangerouslySetInnerHTML={{
+          __html: row.content || "No description",
+        }}>
+         
         </span>
       ),
     },
@@ -74,6 +86,13 @@ const Article = () => {
           {new Date(row.created_at).toLocaleDateString()}
         </span>
       ),
+    },{
+      name: "Status",
+      cell: (row) => (
+        <button className="text-lg font-suwannaphum text-gray-900 bg-green-300 px-4 py-2 rounded-xl ">
+          Active
+        </button>
+      ),
     },
     {
       name: "Actions",
@@ -85,7 +104,7 @@ const Article = () => {
             type="button"
           >
             <svg
-              className="w-5 h-5"
+              className="w-5 h-5 text-orange-500 text-center"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -96,35 +115,41 @@ const Article = () => {
           </button>
           <div
             id={`dropdown-menu-${row.id}`}
-            className="absolute right-0 z-10 hidden w-44 bg-white rounded-;g divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 mt-[150px]"
+            className="absolute right-0 z-10 hidden w-36 bg-white divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 mt-[150px]"
           >
-            <ul className="py-1  text-gray-700 dark:text-gray-200 font-suwannaphum text-lg">
-              <li>
+         <ul className="py-1 text-gray-900 dark:text-gray-200 font-suwannaphum text-lg">
+            
+              <li className="flex items-center mb-2">
+                <MdOutlineDisabledByDefault className="mr-2 text-xl text-red-600" />
                 <a
                   href="#"
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-md transition-colors duration-300"
+                  onClick={() => handleClose(row.id)}
                 >
-                  បង្ហាញ
+                  បិទ
                 </a>
               </li>
-              <li>
+              <li className="flex items-center mb-2">
+                <MdDelete className="mr-2 text-xl text-red-600" />
                 <a
                   href="#"
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-md transition-colors duration-300"
                   onClick={() => handleDelete(row.id)}
                 >
                   លុប
                 </a>
               </li>
-              <li>
+              <li className="flex items-center">
+                <MdEdit className="mr-2 text-xl text-green-600" />
                 <Link
                   to={`/editArticle/${row.id}`}
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-md transition-colors duration-300"
                 >
-                  កែរប្រែ
+                  កែប្រែ
                 </Link>
               </li>
             </ul>
+
           </div>
         </div>
       ),
@@ -169,13 +194,11 @@ const Article = () => {
         if (!response.ok) {
           throw new Error("Failed to delete article");
         }
-
         // Remove the deleted article from the current data set
         const updatedData = data.filter((item) => item.id !== id);
         setData(updatedData);
         setFilteredData(updatedData);
         setTotalRows(totalRows - 1);
-
         // Show success message
         Swal.fire("Deleted!", "Your article has been deleted.", "success");
       }
@@ -324,14 +347,14 @@ const Article = () => {
           <div className="text-center mt-4">
             <button
               onClick={handleCheckAllPages}
-              className="bg-blue-500 px-4 py-2 font-suwannaphum font-semibold text-white rounded-md"
+              className="bg-blue-500 px-4 py-2 font-suwannaphum font-semibold text-white rounded-md hover:text-black hover:bg-green-500"
             >
-              Check All Pages
+              ពិនិត្យមើលទំព័រទាំងអស់
             </button>
           </div>
         )}
       </section>
-    </>
+    </> 
   );
 };
 

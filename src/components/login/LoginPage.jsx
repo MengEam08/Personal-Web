@@ -20,14 +20,12 @@ const LoginPage = () => {
   const [profile, setProfile] = useState(null);
   const [otp, setOtp] = useState(""); // State for OTP
   const navigate = useNavigate();
-
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email format").required("Required"),
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Required"),
   });
-
   const handleLogin = async () => {
     setIsLoading(true);
     const item = { email, password };
@@ -136,13 +134,12 @@ const LoginPage = () => {
     googleLogout();
     setProfile();
   };
-
   return (
     <>
       {isSuccess ? (
         <div className="font-suwannaphum">
           <div className="min-h-screen flex flex-col items-center justify-center">
-            <div className="grid items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
+            <div className="grid items-center gap-4 max-w-6xl w-full p-4 m-4  shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
               <div className="w-full px-4 py-4">
                 <h3 className="text-blue-700 text-3xl font-extrabold text-center">
                   You have successfully logged in!
@@ -157,19 +154,23 @@ const LoginPage = () => {
             <div className="grid md:grid-cols-2 items-center gap-4 max-md:gap-8 max-w-6xl max-md:max-w-lg w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
               <div className="md:max-w-md w-full px-4 py-4">
                 <form>
-                  <div className="mb-12">
+                  <div className="mb-3">
                     <h3 className="text-blue-700 text-3xl font-extrabold text-center">
                       ចូលគណនី
                     </h3>
-                    <p className="text-sm mt-4 text-gray-800 text-center">
+                    <p className="text-lg mt-4 font-suwannaphum text-gray-800 text-center">
                       មិនទាន់មានគណនី?{" "}
                       <Link
                         to="/register"
-                        className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
+                        className="text-blue-600 text-lg font-suwannaphum font-semibold hover:underline ml-1 whitespace-nowrap"
                       >
                         បង្កើតគណនី
                       </Link>
                     </p>
+                    <section className="w-20 h-20 mx-auto rounded-full mt-4 overflow-hidden">
+                      <img src="../src/assets/STEM_TOTUR.jpg" alt="STEM Tutorial" className="w-full h-full object-cover" />
+                    </section>
+
                   </div>
 
                   <div>
@@ -213,11 +214,11 @@ const LoginPage = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between mt-4 mb-8">
+                  <div className="flex justify-between mt-4 mb-8 font-suwannaphum">
                     <label>
                       <input
                         type="checkbox"
-                        className="text-blue-700 accent-blue-600 mr-2 "
+                        className="text-blue-700 text-lg font-suwannaphum accent-blue-600 mr-2 "
                       />
                       ចងចាំខ្ញុំ
                     </label>
@@ -236,7 +237,7 @@ const LoginPage = () => {
                   <button
                     type="button"
                     onClick={handleLogin}
-                    className="w-full bg-blue-700 text-white py-2 rounded-[15px] font-semibold text-[14px] shadow-sm hover:bg-blue-600 transition-all duration-300 ease-in-out"
+                    className="w-full bg-blue-700 text-white py-3 rounded-[15px] font-semibold text-[16px] shadow-sm hover:bg-blue-600 transition-all duration-300 ease-in-out"
                     disabled={isLoading}
                   >
                     {isLoading ? "Logging in..." : "បញ្ចូល"}
@@ -244,7 +245,7 @@ const LoginPage = () => {
                   <button
                     type="button"
                     onClick={() => login()}
-                    className="w-full bg-red-700 text-white py-2 rounded-[15px] font-semibold text-[14px] shadow-sm hover:bg-red-600 transition-all duration-300 ease-in-out mt-4"
+                    className="w-full bg-red-700 text-white py-2 rounded-[15px] font-semibold text-[16px] shadow-sm hover:bg-red-600 transition-all duration-300 ease-in-out mt-4"
                   >
                     Login with Google
                   </button>

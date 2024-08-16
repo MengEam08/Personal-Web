@@ -82,7 +82,7 @@ const TextEditor = ({ value, onChange, placeholder }) => {
   }, [value]);
 
   return (
-    <div className="inline-block w-full">
+    <div className="inline-block w-full font-suwannaphum h-28">
       <div ref={editorRef} id="editor" />
     </div>
   );

@@ -93,13 +93,13 @@ const NavbarComponent = () => {
 
   return (
     <nav className="w-full bg-[#16A1DF] sticky top-0 z-50">
-      <Navbar fluid rounded className="bg-[#16A1DF]">
+      <Navbar fluid rounded className="bg-[#16A1DF] w-[95%] mx-auto">
         <Navbar.Brand>
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
             <Link to="/">
               <img
                 className="w-[80px] h-[50px] md:w-[100px] md:h-[60px] object-cover"
-                src="../src/assets/STEM_LOGO_TUTOR.png"
+                src="../src/assets/STEM_TOTUR.jpg"
                 alt="STEM Logo"
               />
             </Link>
@@ -119,7 +119,7 @@ const NavbarComponent = () => {
               inline
               label={<Avatar alt="User settings" img={profile.image} rounded />}
             >
-              <Dropdown.Header className="font-suwannaphum text-sm">
+              <Dropdown.Header className="font-suwannaphum text-md">
                 User Actions
               </Dropdown.Header>
               <Dropdown.Item onClick={() => handleNavigate("/dashboard")}>
@@ -139,7 +139,7 @@ const NavbarComponent = () => {
           <NavLink
             to="/book"
             className={({ isActive }) =>
-              `font-suwannaphum text-xl px-4 md:text-2xl font-medium text-white ${
+              `font-suwannaphum text-md px-4 md:text-2xl font-normal text-white ${
                 isActive ? "bg-cyan-400  md:text-[#FF9900] md:bg-[#16A1DF]" : ""
               }`
             }
