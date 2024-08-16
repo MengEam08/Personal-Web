@@ -12,7 +12,7 @@ const CountUp = ({ end }) => {
     const incrementTime = (duration * 1000) / totalSteps; // time per step
 
     const increment = setInterval(() => {
-      setCount(prevCount => {
+      setCount((prevCount) => {
         if (prevCount < end) {
           return prevCount + 1;
         } else {
@@ -25,27 +25,39 @@ const CountUp = ({ end }) => {
     return () => clearInterval(increment);
   }, [end]);
 
-  return <h3 className="text-white text-7xl font-suwannaphum font-bold">{count.toLocaleString()}</h3>;
+  return (
+    <h3 className="text-white text-7xl font-suwannaphum font-bold">
+      {count.toLocaleString()}
+    </h3>
+  );
 };
 
 const Statistics = () => {
   return (
     <div className="flex justify-around font-suwannaphum w-full text-center mt-8 m-5">
       <div className="font-suwannaphum">
-        <CountUp end={33030} className="font-suwannaphum"/>
-        <span className="text-white text-3xl font-suwannaphum font-bold">សៀវភៅ</span>
+        <CountUp end={3030} className="font-suwannaphum" />
+        <span className="text-white text-3xl font-suwannaphum font-bold">
+          សៀវភៅ
+        </span>
       </div>
       <div className="font-suwannaphum">
         <CountUp end={552} />
-        <span className="text-white text-3xl font-suwannaphum font-bold">មេរៀន</span>
+        <span className="text-white text-3xl font-suwannaphum font-bold">
+          មេរៀន
+        </span>
       </div>
       <div className="font-bold">
         <CountUp end={240} />
-        <span className="text-white text-3xl font-suwannaphum font-bold">វេទិកា</span>
+        <span className="text-white text-3xl font-suwannaphum font-bold">
+          វេទិកា
+        </span>
       </div>
       <div className="font-suwannaphum">
         <CountUp end={670} />
-        <span className="text-white text-3xl font-suwannaphum font-bold">ប្លុក</span>
+        <span className="text-white text-3xl font-suwannaphum font-bold">
+          ប្លុក
+        </span>
       </div>
     </div>
   );
@@ -66,10 +78,16 @@ const Background = () => {
               </h1>
             </div>
             <span className="text-white font-suwannaphum text-xl font-normal mt-4 sm:text-xl sm:px-2 lg:px-16 lg:mt-5 xl:mx-40 xl:px-40 line-clamp-3">
-              បង្កើនចំណេះដឹងថ្មីៗជាមួយនឹង STEM Tuto ឆ្ពោះទៅកាន់អនាគតភ្លឺស្វាងជាមួយនឹងការបណ្តុះបណ្តាលតាមបែបទំនេីប STEM ។ 
-              នៅ STEM Tuto យើងមានគោលបំណងក្នុងការផ្តល់នូវការយល់ដឹងយ៉ាងជ្រាលជ្រៅ និង ស្រឡាញ់ពេញចិត្តទៅលេីមុខវិជ្ជា វិទ្យាសាស្ត្រ បច្ចេកវិទ្យា វិស្វកម្ម និង គណិតវិទ្យា ដល់សិស្សានុសិស្សគ្រប់វ័យ និងគ្រប់ជំនាន់។ បេសកកម្មរបស់យើងគឺជំរុញ និងអភិវឌ្ឍជំនាន់ក្រោយនៃអ្នកច្នៃប្រឌិត អោយកាន់តែរីកចម្រើនទៅមុខបន្ថែមទៀតក្នុងការ ដោះស្រាយបញ្ហា និងការអភិវឌ្ឍន៍បច្ចេកវិទ្យាថ្មីៗអោយកាន់តែប្រសេីរឡើង។
+              បង្កើនចំណេះដឹងថ្មីៗជាមួយនឹង STEM Tuto
+              ឆ្ពោះទៅកាន់អនាគតភ្លឺស្វាងជាមួយនឹងការបណ្តុះបណ្តាលតាមបែបទំនេីប STEM
+              ។ នៅ STEM Tuto យើងមានគោលបំណងក្នុងការផ្តល់នូវការយល់ដឹងយ៉ាងជ្រាលជ្រៅ
+              និង ស្រឡាញ់ពេញចិត្តទៅលេីមុខវិជ្ជា វិទ្យាសាស្ត្រ បច្ចេកវិទ្យា
+              វិស្វកម្ម និង គណិតវិទ្យា ដល់សិស្សានុសិស្សគ្រប់វ័យ និងគ្រប់ជំនាន់។
+              បេសកកម្មរបស់យើងគឺជំរុញ និងអភិវឌ្ឍជំនាន់ក្រោយនៃអ្នកច្នៃប្រឌិត
+              អោយកាន់តែរីកចម្រើនទៅមុខបន្ថែមទៀតក្នុងការ ដោះស្រាយបញ្ហា
+              និងការអភិវឌ្ឍន៍បច្ចេកវិទ្យាថ្មីៗអោយកាន់តែប្រសេីរឡើង។
             </span>
-            
+
             {/* Include the Statistics component here */}
             <Statistics />
           </div>
