@@ -52,7 +52,7 @@ const TextEditor = ({ value, onChange, placeholder }) => {
           syntax: { hljs },
           toolbar: toolbarOptions,
         },
-        placeholder: placeholder,
+        placeholder,
       });
 
       // Load content from local storage if available
@@ -72,12 +72,17 @@ const TextEditor = ({ value, onChange, placeholder }) => {
 
   useEffect(() => {
     if (quillRef.current) {
-      quillRef.current.root.innerHTML = value; // Load initial content
+      // Ensure the editor content reflects the passed value
+      const currentContent = quillRef.current.root.innerHTML;
+      if (currentContent !== value) {
+        quillRef.current.root.innerHTML = value;
+        localStorage.setItem("editorContent", value); // Update local storage with new value
+      }
     }
   }, [value]);
 
   return (
-    <div className="inline-block w-auto">
+    <div className="inline-block w-full font-suwannaphum h-28">
       <div ref={editorRef} id="editor" />
     </div>
   );

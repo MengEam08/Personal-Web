@@ -388,7 +388,7 @@ const CreateComment = () => {
                   >
                     <i className="far fa-thumbs-up"></i> Reply
                   </a>
-                </div>
+                </div> 
               </div>
 
               <div

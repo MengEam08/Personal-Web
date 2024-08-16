@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import TextEditor from "../texteditor/TextEditor";
 
 const EditArticle = () => {
   const { id } = useParams();
@@ -52,11 +53,17 @@ const EditArticle = () => {
     fetchArticle();
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleTitleChange = (title) => {
     setArticle((prevState) => ({
       ...prevState,
-      [name]: value,
+      title,
+    }));
+  };
+
+  const handleContentChange = (content) => {
+    setArticle((prevState) => ({
+      ...prevState,
+      content,
     }));
   };
 
@@ -170,23 +177,18 @@ const EditArticle = () => {
         <div className="flex flex-col md:flex-row gap-4">
           <div className="w-full md:w-1/2">
             <label className="block">ចំណងជើង</label>
-            <input
-              placeholder="សូមធ្វើការសរសេរកែប្រែនៅចំណងជើងអ្នក......"
-              type="text"
-              name="title"
+            <TextEditor
               value={article.title}
-              onChange={handleChange}
-              className="w-full h-[50px] px-3 py-2 border-gray-300 rounded-lg bg-gray-50"
-              required
+              onChange={handleTitleChange}
+              className="text-black"
+              placeholder="សូមធ្វើការសរសេរកែប្រែនៅចំណងជើងអ្នក......"
             />
             <label className="block mt-4">សេចក្តីលំអិត</label>
-            <textarea
-              name="content"
-              placeholder="សូមធ្វើការសរសេរកែប្រែនៅសេចក្តីលំអិតរបស់អ្នក......"
+            <TextEditor
               value={article.content}
-              onChange={handleChange}
-              className="w-full h-[500px] px-3 py-2 border-gray-300 rounded-lg bg-gray-50"
-              required
+              onChange={handleContentChange}
+              className="text-black"
+              placeholder="សូមធ្វើការសរសេរកែប្រែនៅសេចក្តីលំអិតរបស់អ្នក......"
             />
           </div>
           <div className="w-full md:w-1/2 border-gray-300">
@@ -244,7 +246,7 @@ const EditArticle = () => {
             className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
             onClick={handleCancel}
           >
-            បោះបង់
+            សម្រេច
           </button>
         </div>
       </form>

@@ -157,7 +157,7 @@ const BlogDetail = () => {
       <section className="w-[100%] mx-auto flex flex-col md:flex-row justify-between gap-8 p-8 font-suwannaphum ">
         <div className="w-full h-full">
           <h1 className="text-2xl font-bold mb-4">{blog.title}</h1>
-          <p className="mb-4 text-[16px]">{blog.content}</p>
+          <p className="mb-4 text-[18px]">{blog.content}</p>
           <div className="w-[60%] mx-auto flex justify-center">
             <div>
               <img
@@ -169,52 +169,56 @@ const BlogDetail = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-[35%] flex flex-col gap-8 ">
-          {/*  */}
-          <div className="w-full p-4 bg-gray-200 rounded-lg shadow-lg flex items-center gap-4 sticky top-28   ">
+        <div className="w-full md:w-[35%] flex flex-col gap-8">
+          {/* Profile Section */}
+          <div className="w-full py-4 px-3 bg-gray-200 rounded-lg shadow-lg flex flex-col items-center">
             <img
               src={
                 blog.profileUser ||
                 "https://mastertondental.co.nz/wp-content/uploads/2022/12/team-profile-placeholder.jpg"
               }
               alt="Profile Image"
-              className="w-12 h-12 rounded-full"
+              className="w-16 h-16 md:w-12 md:h-12 rounded-full"
             />
-            <div className="ml-3 flex flex-col items-start">
-              <div className="font-bold text-sm mt-2">{`${blog.author}`}</div>
-              <div className="text-gray-400 text-xs mt-2">@{blog.author}</div>
+            <div className="ml-3 flex flex-col items-center text-center">
+              <div className="font-bold text-base md:text-sm mt-2">{`${blog.author}`}</div>
+              <div className="text-gray-400 text-sm md:text-xs mt-2">
+                @{blog.author}
+              </div>
               <span className="mt-2">
                 {error && <p>Error: {error}</p>}
                 {totalFollowers !== null && !loading && !error && (
-                  <p>ចំនួនតាម : {totalFollowers}</p>
+                  <p className="text-sm md:text-base">
+                    ចំនួនតាម : {totalFollowers}
+                  </p>
                 )}
               </span>
             </div>
-            <div className="flex flex-col md:flex-row items-center space-x-3 space-y-2 md:space-y-0 ">
-              <div className="flex ml-60 items-center space-x-2 text-sm md:text-base transition-opacity duration-300 hover:opacity-75"></div>
-              <div
-                className={`flex items-center text-white space-x-2 py-1 px-2 md:py-2 md:px-4 rounded-xl cursor-pointer transition-all duration-300  ${
-                  isFollowing
-                    ? "bg-gray-400"
-                    : "bg-[#16a1df] hover:bg-[#246a8b] transform hover:scale-105"
-                } mt-4 md:mt-0`}
-                onClick={handleFollowToggle}
-              >
-                <SlUserFollow className="text-sm mt-[2px] md:mt-[3px]" />
-                <button className="text-sm md:text-base ">
-                  {isFollowing ? "ឈប់តាម" : "តាមដាន"}
-                </button>
-              </div>
+
+            <div
+              className={`flex items-center text-white space-x-2 py-2 px-4 md:px-8 lg:px-12 xl:px-16 rounded-xl cursor-pointer transition-all duration-300 mt-4 ${
+                isFollowing
+                  ? "bg-gray-400"
+                  : "bg-[#16a1df] hover:bg-[#246a8b] transform hover:scale-105"
+              }`}
+              onClick={handleFollowToggle}
+            >
+              <SlUserFollow className="text-base md:text-sm" />
+              <button className="text-sm md:text-base lg:text-lg">
+                {isFollowing ? "ឈប់តាម" : "តាមដាន"}
+              </button>
             </div>
           </div>
-          {/*  */}
 
-          <div className="w-full p-4 bg-gray-200 rounded-lg sticky top-[250px] ">
+          {/* Related Articles Section */}
+          <div className="w-full p-4 bg-gray-200 rounded-lg">
             <ul>
-              <li className="font-bold mb-4 ">អត្ថបទដែលពាក់ព័ន្ធ</li>
+              <li className="font-bold text-lg md:text-base mb-4">
+                អត្ថបទដែលពាក់ព័ន្ធ
+              </li>
               {[...Array(4)].map((_, index) => (
                 <li key={index} className="flex items-center space-x-4">
-                  <div className="w-[60px] h-[60px] mt-3 cursor-pointer">
+                  <div className="w-[80px] h-[80px] md:w-[60px] md:h-[60px] mt-3 cursor-pointer">
                     <img
                       src={blog.image}
                       alt="Related article image"
@@ -223,9 +227,10 @@ const BlogDetail = () => {
                   </div>
 
                   <div>
-                    <p className="block title-truncate">{blog.title}</p>
-
-                    <div className="text-[14px]">
+                    <p className="block title-truncate text-sm md:text-base">
+                      {blog.title}
+                    </p>
+                    <div className="text-sm md:text-[14px]">
                       បង្កើត: {moment(blog.created_at).format("MMMM D, YYYY")}
                     </div>
                   </div>
@@ -233,9 +238,13 @@ const BlogDetail = () => {
               ))}
             </ul>
           </div>
-          <div className="w-full p-4 bg-gray-200 rounded-lg shadow-md items-center gap-2 font-suwannaphum sticky top-[630px]">
-            <h6 className="text-gray-800 font-semibold mb-2">ពាក្យគន្លឹះ:</h6>
-            <span className="mt-2 px-2 py-1 text-xs bg-gray-100 rounded-full text-gray-700 cursor-pointer hover:bg-blue-500 hover:text-white">
+
+          {/* Keywords Section */}
+          <div className="w-full p-4 bg-gray-200 rounded-lg shadow-md items-center gap-2 font-suwannaphum">
+            <h6 className="text-gray-800 font-semibold text-lg md:text-base mb-2">
+              ពាក្យគន្លឹះ:
+            </h6>
+            <span className="mt-2 px-4 py-2 text-sm md:text-xs bg-gray-100 rounded-full text-gray-700 cursor-pointer hover:bg-blue-500 hover:text-white">
               មិនទាន់មានពាក្យគន្លឹះទេ
             </span>
           </div>

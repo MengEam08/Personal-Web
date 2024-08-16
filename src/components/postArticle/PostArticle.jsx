@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { saveBlog } from "../../services/fetchBooks";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URI } from "../../services/constants";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import TextEditor from "../texteditor/TextEditor";
 
 const PostArticle = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const PostArticle = () => {
 
       await saveBlog({
         title,
-        content,
+        content, // The rich text content
         image: json.url,
       });
 
@@ -93,41 +94,25 @@ const PostArticle = () => {
           >
             ចំណងជើង**
           </label>
-          <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
-            <div className="px-4 py-2 bg-white rounded-t-lg">
-              <textarea
-                id="title"
-                name="title"
-                value={title}
-                rows="4"
-                className="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0"
-                placeholder="សរសេរ ចំណងជើង**"
-                required
-                onChange={(e) => setTitle(e.target.value)}
-              ></textarea>
-            </div>
-          </div>
+          <TextEditor
+            value={title}
+            onChange={(content) => setTitle(content)}
+            className="text-black font-suwannaphum"
+          />
+          
           <label
-            htmlFor="description"
-            className="block text-md leading-6 text-gray-900 font-bold"
+            htmlFor="content"
+            className="block text-md leading-6 text-gray-900 font-bold mt-4"
           >
             ពិពណ៏នាចំណងជើង**
           </label>
-          <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
-            <div className="px-4 py-2 bg-white rounded-t-lg">
-              <textarea
-                id="content"
-                rows="4"
-                className="w-full px-0 text-sm text-gray-900 bg-white border-0 focus:ring-0"
-                placeholder="ការពិពណ៏នាចមណងជើង**"
-                onChange={(e) => setContent(e.target.value)}
-                name="description"
-                value={content}
-                required
-              ></textarea>
-            </div>
-          </div>
-          <div className="col-span-full">
+          <TextEditor
+            value={content}
+            onChange={(content) => setContent(content)}
+            className="text-black"
+          />
+
+          <div className="col-span-full mt-4">
             <label
               htmlFor="file-upload"
               className="block text-md font-bold leading-6 text-gray-900"
@@ -187,6 +172,7 @@ const PostArticle = () => {
             </button>
           </div>
         </form>
+
       </div>
     </main>
   );

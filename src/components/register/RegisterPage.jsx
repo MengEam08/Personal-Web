@@ -56,19 +56,20 @@ const RegisterPage = () => {
       }
     },
   });
-
-  // Toggle password visibility
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
   return (
     <div className="font-suwannaphum">
       <div className="flex flex-col items-center justify-center p-6">
-        <div className="grid lg:grid-cols-2 items-center gap-6 max-w-7xl max-lg:max-w-xl w-full">
-          <form onSubmit={formik.handleSubmit} className="lg:max-w-md w-full">
-            <h3 className="text-blue-600 text-3xl font-extrabold mb-12 text-center">
+        <div className="grid lg:grid-cols-2 items-center gap-6 max-w-7xl max-lg:max-w-xl w-ful">
+          <form onSubmit={formik.handleSubmit} className="lg:max-w-md w-full ">
+            <h3 className="text-blue-600 text-2xl font-suwannaphum font-semibold mb-3 text-center">
               បង្កើតគណនី
             </h3>
+            <section className="w-20 h-20 mx-auto rounded-full mt-4 overflow-hidden">
+              <img src="../src/assets/STEM_TOTUR.jpg" alt="STEM Tutorial" className="w-full h-full object-cover" />
+            </section>
             <div className="space-y-3">
               <div>
                 <label className="text-[20px] font-suwannaphum" htmlFor="first_name">
@@ -233,7 +234,6 @@ const RegisterPage = () => {
                 {formik.isSubmitting ? "Submitting..." : "បង្កើតគណនី"}
               </button>
             </div>
-
             <p className="text-sm text-gray-800 mt-6 font-suwannaphum">
               មានគណនីហើយមែនទេ?{" "}
               <a

@@ -49,8 +49,7 @@ const Article = () => {
       selector: (row) => row.title,
       sortable: true,
       cell: (row) => (
-        <span className="text-lg line-clamp-2 font-suwannaphum">
-          {row.title}
+        <span className="text-lg line-clamp-2 font-suwannaphum"  dangerouslySetInnerHTML={{ __html: row.title || "No title" }}>
         </span>
       ),
     },
@@ -59,8 +58,10 @@ const Article = () => {
       selector: (row) => row.content,
       sortable: true,
       cell: (row) => (
-        <span className="text-lg line-clamp-2 font-suwannaphum">
-          {row.content}
+        <span className="text-lg line-clamp-2 font-suwannaphum"  dangerouslySetInnerHTML={{
+          __html: row.content || "No description",
+        }}>
+         
         </span>
       ),
     },
@@ -346,14 +347,14 @@ const Article = () => {
           <div className="text-center mt-4">
             <button
               onClick={handleCheckAllPages}
-              className="bg-blue-500 px-4 py-2 font-suwannaphum font-semibold text-white rounded-md"
+              className="bg-blue-500 px-4 py-2 font-suwannaphum font-semibold text-white rounded-md hover:text-black hover:bg-green-500"
             >
               ពិនិត្យមើលទំព័រទាំងអស់
             </button>
           </div>
         )}
       </section>
-    </>
+    </> 
   );
 };
 

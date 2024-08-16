@@ -2,6 +2,7 @@ import { Textarea } from "flowbite-react";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import TextEditor from "../texteditor/TextEditor"; // Import TextEditor
 
 const EditForum = () => {
   const { id } = useParams();
@@ -66,11 +67,17 @@ const EditForum = () => {
     fetchForumData();
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChangeTitle = (content) => {
     setForumData((prevState) => ({
       ...prevState,
-      [name]: value,
+      title: content,
+    }));
+  };
+
+  const handleChangeDescription = (content) => {
+    setForumData((prevState) => ({
+      ...prevState,
+      description: content,
     }));
   };
 
@@ -139,7 +146,6 @@ const EditForum = () => {
         }
       );
 
-
       if (response.ok) {
         Swal.fire("Success", "Forum updated successfully.", "success");
         navigate("/getforum");
@@ -186,22 +192,16 @@ const EditForum = () => {
         <div className="flex flex-col md:flex-row gap-4">
           <div className="w-full md:w-1/2">
             <label className="block">ចំណងជើង</label>
-            <input
-              placeholder="សូមធ្វើការសរសេរកែប្រែនៅចំណងជើងអ្នក......"
-              type="text"
-              name="title"
+            <TextEditor
               value={forumData.title}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border-gray-300 rounded-lg bg-gray-50"
-              required
+              onChange={handleChangeTitle}
+              className="text-black font-suwannaphum"
             />
             <label className="block mt-4">សេចក្តីលំអិត</label>
-            <Textarea
-              name="description"
-              value={forumData.description} // Display the stripped value
-              onChange={handleChange}
-              className="w-full h-[500px] px-3 py-2 border-gray-300 rounded-lg bg-gray-50"
-              required
+            <TextEditor
+              value={forumData.description}
+              onChange={handleChangeDescription}
+              className="text-black"
             />
           </div>
           <div className="w-full md:w-1/2 border-gray-300">
@@ -257,8 +257,9 @@ const EditForum = () => {
           </button>
           <button
             type="button"
-            className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+            className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
             onClick={handleCancel}
+            disabled={loading}
           >
             បោះបង់
           </button>

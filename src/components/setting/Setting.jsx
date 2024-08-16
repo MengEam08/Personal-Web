@@ -237,6 +237,7 @@ const Setting = () => {
                   />
                 </div>
 
+
                 <div className="text-[20px] font-suwannaphum mb-4">
                   <div className="mb-2 block font-suwannaphum">
                     <Label
@@ -334,6 +335,7 @@ const Setting = () => {
                       <span>អុីមែល</span>
                       <span>{profileData.email}</span>
                     </li>
+
 
                     <li className="flex justify-between">
                       <span>ថ្ងៃខែឆ្នាំកំណើត</span>
