@@ -123,7 +123,6 @@ const BlogDetail = () => {
       const newIsFollowing = !isFollowing;
       setIsFollowing(newIsFollowing);
 
-
       // Update total followers count based on the new follow status
       setTotalFollowers((prev) => (newIsFollowing ? prev + 1 : prev - 1));
 
@@ -226,7 +225,6 @@ const BlogDetail = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-
 
                   <div>
                     <p className="block title-truncate text-sm md:text-base">
