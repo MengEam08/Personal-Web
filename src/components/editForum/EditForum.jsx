@@ -1,3 +1,4 @@
+import { Textarea } from "flowbite-react";
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -15,7 +16,6 @@ const EditForum = () => {
   const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
-    // Fetch the forum data by ID
     const fetchForumData = async () => {
       const accessToken = localStorage.getItem("access_token");
       setLoading(true);
@@ -34,7 +34,20 @@ const EditForum = () => {
         }
 
         const data = await response.json();
-        setForumData(data);
+
+        // Strip HTML tags from title and description
+        const strippedTitle = data.title.replace(/<\/?[^>]+(>|$)/g, "");
+        const strippedDescription = data.description.replace(
+          /<\/?[^>]+(>|$)/g,
+          ""
+        );
+
+        setForumData({
+          ...data,
+          title: strippedTitle,
+          description: strippedDescription,
+        });
+
         if (data.image) {
           setPreviewImage(data.image);
         }
@@ -73,7 +86,7 @@ const EditForum = () => {
     e.preventDefault();
     setLoading(true);
 
-    let imageUrl = forumData.image; // Default to existing image URL
+    let imageUrl = forumData.image;
 
     if (file) {
       const formData = new FormData();
@@ -95,7 +108,7 @@ const EditForum = () => {
         }
 
         const uploadResult = await uploadResponse.json();
-        imageUrl = uploadResult.url; // Extract URL from the response
+        imageUrl = uploadResult.url;
       } catch (error) {
         console.error("Error uploading image:", error);
         Swal.fire(
@@ -121,14 +134,15 @@ const EditForum = () => {
           body: JSON.stringify({
             title: forumData.title,
             description: forumData.description,
-            image: imageUrl, // Update with the new or existing image URL
+            image: imageUrl,
           }),
         }
       );
 
+
       if (response.ok) {
         Swal.fire("Success", "Forum updated successfully.", "success");
-        navigate("/getforum"); // Redirect to the forums list page
+        navigate("/getforum");
       } else {
         const errorText = await response.text();
         console.error("Error response:", errorText);
@@ -158,7 +172,7 @@ const EditForum = () => {
       cancelButtonText: "No, stay here",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/getforum"); // Redirect if confirmed
+        navigate("/getforum");
       }
     });
   };
@@ -182,10 +196,9 @@ const EditForum = () => {
               required
             />
             <label className="block mt-4">សេចក្តីលំអិត</label>
-            <textarea
+            <Textarea
               name="description"
-              placeholder="សូមធ្វើការសរសេរកែប្រែនៅសេចក្តីលំអិតរបស់អ្នក......"
-              value={forumData.description}
+              value={forumData.description} // Display the stripped value
               onChange={handleChange}
               className="w-full h-[500px] px-3 py-2 border-gray-300 rounded-lg bg-gray-50"
               required
@@ -233,6 +246,7 @@ const EditForum = () => {
             )}
           </div>
         </div>
+
         <div className="flex items-center space-x-4">
           <button
             type="submit"

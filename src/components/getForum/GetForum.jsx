@@ -3,7 +3,12 @@ import DataTable from "react-data-table-component";
 import Dashboard from "../../components/dashboard/Dashboard";
 import { Link, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2"; // Import SweetAlert2
-
+import { FaEye } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+import { MdOutlineDisabledByDefault } from "react-icons/md";
+// import "./data.css";
+// import { selector } from "gsap";
 const GetForum = () => {
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -11,9 +16,15 @@ const GetForum = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalRows, setTotalRows] = useState(0);
+  const [param, setParam] = useSearchParams();
   const [checkAllPages, setCheckAllPages] = useState(false);
-  const [param] = useSearchParams(); // Used for initial data fetch based on URL params
-
+  const handleClose = (id) => {
+    const menu = document.getElementById(`dropdown-menu-${id}`);
+    if (menu) {
+      menu.classList.add("hidden"); // Hide the dropdown menu
+    }
+  };
+  
   const columns = [
     {
       name: "ID",
@@ -38,10 +49,9 @@ const GetForum = () => {
       selector: (row) => row.title,
       sortable: true,
       cell: (row) => (
-        <span
-          className="text-lg line-clamp-2 font-suwannaphum"
-          dangerouslySetInnerHTML={{ __html: row.title || "No title" }}
-        ></span>
+        <span className="text-lg line-clamp-2 font-suwannaphum">
+          {row.title}
+        </span>
       ),
     },
     {
@@ -49,12 +59,9 @@ const GetForum = () => {
       selector: (row) => row.description,
       sortable: true,
       cell: (row) => (
-        <span
-          className="text-lg line-clamp-2 font-suwannaphum"
-          dangerouslySetInnerHTML={{
-            __html: row.description || "No description",
-          }}
-        ></span>
+        <span className="text-lg line-clamp-2 font-suwannaphum">
+          {row.content}
+        </span>
       ),
     },
     {
@@ -78,6 +85,13 @@ const GetForum = () => {
           {new Date(row.created_at).toLocaleDateString()}
         </span>
       ),
+    },{
+      name: "Status",
+      cell: (row) => (
+        <button className="text-lg font-suwannaphum text-gray-900 bg-green-300 px-4 py-2 rounded-xl ">
+          Active
+        </button>
+      ),
     },
     {
       name: "Actions",
@@ -89,7 +103,7 @@ const GetForum = () => {
             type="button"
           >
             <svg
-              className="w-5 h-5"
+              className="w-5 h-5 text-orange-500 text-center"
               aria-hidden="true"
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -100,63 +114,52 @@ const GetForum = () => {
           </button>
           <div
             id={`dropdown-menu-${row.id}`}
-            className="absolute right-0 z-10 hidden w-44 bg-white rounded-;g divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 mt-[150px]"
+            className="absolute right-0 z-10 hidden w-36 bg-white divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 mt-[150px]"
           >
-            <ul className="py-1  text-gray-700 dark:text-gray-200 font-suwannaphum text-lg">
-              <li>
+         <ul className="py-1 text-gray-900 dark:text-gray-200 font-suwannaphum text-lg">
+            
+              <li className="flex items-center mb-2">
+                <MdOutlineDisabledByDefault className="mr-2 text-xl text-red-600" />
                 <a
                   href="#"
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-md transition-colors duration-300"
+                  onClick={() => handleClose(row.id)}
                 >
-                  បង្ហាញ
+                  បិទ
                 </a>
               </li>
-              <li>
+              <li className="flex items-center mb-2">
+                <MdDelete className="mr-2 text-xl text-red-600" />
                 <a
                   href="#"
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-md transition-colors duration-300"
                   onClick={() => handleDelete(row.id)}
                 >
                   លុប
                 </a>
               </li>
-              <li>
+              <li className="flex items-center">
+                <MdEdit className="mr-2 text-xl text-green-600" />
                 <Link
                   to={`/editForum/${row.id}`}
-                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-md transition-colors duration-300"
                 >
-                  កែរប្រែ
+                  កែប្រែ
                 </Link>
               </li>
             </ul>
+
           </div>
         </div>
       ),
     },
-    // {
-    //   name: "Actions",
-    //   cell: (row) => (
-    //     <div className="flex flex-col gap-1">
-    //       <Link
-    //         to={`/editForum/${row.id}`}
-    //         className="bg-green-500 text-sm px-3 py-1 rounded-lg text-center md:px-4 md:py-2"
-    //       >
-    //         Edit
-    //       </Link>
-    //       <button
-    //         onClick={() => handleDelete(row.id)}
-    //         className="bg-red-600 text-sm px-3 py-1 rounded-lg text-center md:px-4 md:py-2"
-    //       >
-    //         Delete
-    //       </button>
-    //     </div>
-    //   ),
-    // },
   ];
+
   const handleDropdownToggle = (id) => {
     const menu = document.getElementById(`dropdown-menu-${id}`);
     menu.classList.toggle("hidden");
   };
+
   const handleDelete = async (id) => {
     try {
       // Show confirmation dialog
@@ -190,23 +193,17 @@ const GetForum = () => {
         if (!response.ok) {
           throw new Error("Failed to delete article");
         }
-
         // Remove the deleted article from the current data set
         const updatedData = data.filter((item) => item.id !== id);
         setData(updatedData);
         setFilteredData(updatedData);
         setTotalRows(totalRows - 1);
-
         // Show success message
-        Swal.fire("Deleted!", "Your forum post has been deleted.", "success");
+        Swal.fire("Deleted!", "Your article has been deleted.", "success");
       }
     } catch (error) {
       console.error("Error deleting article:", error);
-      Swal.fire(
-        "Error!",
-        "There was an issue deleting the forum post.",
-        "error"
-      );
+      Swal.fire("Error!", "There was an issue deleting the article.", "error");
     }
   };
 
@@ -238,6 +235,7 @@ const GetForum = () => {
       const userData = data.filter((users) => users.author === nameUser.name);
 
       setData((prevData) => {
+        // Merge previous and new data
         const newData = [...prevData, ...userData];
         return [...new Set(newData.map((item) => item.id))].map((id) =>
           newData.find((item) => item.id === id)
@@ -297,6 +295,7 @@ const GetForum = () => {
   };
 
   const handlePageChange = (page) => {
+    setParam({ page });
     setPage(page);
     if (!checkAllPages) {
       fetchData(page);
@@ -333,8 +332,15 @@ const GetForum = () => {
           progressComponent={<div>Loading...</div>}
           fixedHeader
           fixedHeaderScrollHeight="600px"
+          actions={
+            <Link
+              to="/postArticle"
+              className="bg-blue-500 px-2 py-2 font-suwannaphum font-semibold text-white rounded-md text-sm md:text-base lg:text-lg"
+            >
+              +New
+            </Link>
+          }
           customStyles={customStyles}
-          key={page} // Key to force re-render on page change
         />
         {filteredData.length === 0 && !isLoading && (
           <div className="text-center mt-4">
@@ -342,7 +348,7 @@ const GetForum = () => {
               onClick={handleCheckAllPages}
               className="bg-blue-500 px-4 py-2 font-suwannaphum font-semibold text-white rounded-md"
             >
-              Check All Pages
+              ពិនិត្យមើលទំព័រទាំងអស់
             </button>
           </div>
         )}
