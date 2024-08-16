@@ -89,7 +89,8 @@ const Book = () => {
 
   return (
     <>
-      <div className="ml-10 mt-5 justify-center font-suwannaphum">
+      <div className="bg-gray-100">
+      <div className="ml-10 justify-center font-suwannaphum ">
         <div className="flex flex-wrap gap-1.5 font-suwannaphum">
           {categories.map((category) => (
             <button
@@ -167,6 +168,8 @@ const Book = () => {
         </div>
       </div>
       <FooterCard />
+      </div>
+      
     </>
   );
 };

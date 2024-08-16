@@ -5,7 +5,7 @@ import NavbarComponent from "./components/navbar/NavbarComponent";
 import GeminiChat from "./components/gemini/gemini";
 const App = () => {
   return (
-    <div className="font-suwannaphum">
+    <div className="font-suwannaphum ">
       <NavbarComponent />
       <Home />
     </div>

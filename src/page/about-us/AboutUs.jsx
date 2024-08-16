@@ -16,7 +16,7 @@ const AboutUs = () => {
     <>
       {isloading ? <Spinner /> : <AllAboutUs />}
 
-      <div className="mt-20">
+      <div className="mt-20 ">
         <FooterCard />
       </div>
     </>

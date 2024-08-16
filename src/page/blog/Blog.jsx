@@ -78,71 +78,73 @@ export const Blog = () => {
   };
   return (
     <>
-      <div className="ml-10 mt-5 justify-center">
-        <div className="flex flex-wrap gap-1.5">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`px-4 py-2 rounded-full font-suwannaphum flex items-center justify-center gap-2 mt-5 ${
-                activeFilter === category
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200"
-              } sm:px-3 sm:py-1.5 md:px-4 md:py-2 xl:px-6 xl:py-3 xl:text-[15px] `}
-              onClick={() => handleFilterClick(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <section
-          id="Projects"
-          className="p-10 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-5"
-        >
-          {filteredData.length > 0 ? (
-            filteredData.map((blog) => (
-              <BlogAllCard key={blog.id} blog={blog} />
-            ))
-          ) : (
-            <p>No blogs found</p>
-          )}
-        </section>
-      )}
-      <div className="flex justify-center mt-4">
-        <div className="bg-white p-4 flex items-center flex-wrap">
-          <button
-            className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 rounded-l-lg focus:shadow-outline hover:bg-green-100"
-            disabled={currentPage === 1 || isLoading}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            Prev
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (pageNumber) => (
+      <div className="bg-gray-100">
+        <div className="ml-10  justify-center">
+          <div className="flex flex-wrap gap-1.5">
+            {categories.map((category) => (
               <button
-                key={pageNumber}
-                onClick={() => handlePageChange(pageNumber)}
-                className={`px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 focus:shadow-outline ${
-                  currentPage === pageNumber ? "bg-green-100" : ""
-                }`}
+                key={category}
+                className={`px-4 py-2 rounded-full font-suwannaphum flex items-center justify-center gap-2 mt-5 ${
+                  activeFilter === category
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
+                } sm:px-3 sm:py-1.5 md:px-4 md:py-2 xl:px-6 xl:py-3 xl:text-[15px] `}
+                onClick={() => handleFilterClick(category)}
               >
-                {pageNumber}
+                {category}
               </button>
-            )
-          )}
-          <button
-            className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-green-600 rounded-r-lg focus:shadow-outline hover:bg-green-100"
-            disabled={currentPage === totalPages || isLoading}
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            Next
-          </button>
+            ))}
+          </div>
         </div>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <section
+            id="Projects"
+            className="p-10 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-5"
+          >
+            {filteredData.length > 0 ? (
+              filteredData.map((blog) => (
+                <BlogAllCard key={blog.id} blog={blog} />
+              ))
+            ) : (
+              <p>No blogs found</p>
+            )}
+          </section>
+        )}
+        <div className="flex justify-center mt-4">
+          <div className="bg-white p-4 flex items-center flex-wrap">
+            <button
+              className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 rounded-l-lg focus:shadow-outline hover:bg-green-100"
+              disabled={currentPage === 1 || isLoading}
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              Prev
+            </button>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageChange(pageNumber)}
+                  className={`px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 focus:shadow-outline ${
+                    currentPage === pageNumber ? "bg-green-100" : ""
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              )
+            )}
+            <button
+              className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-green-600 rounded-r-lg focus:shadow-outline hover:bg-green-100"
+              disabled={currentPage === totalPages || isLoading}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+        <FooterCard />
       </div>
-      <FooterCard />
     </>
   );
 };

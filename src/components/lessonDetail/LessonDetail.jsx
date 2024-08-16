@@ -24,45 +24,45 @@ const LessonDetail = () => {
   return (
     <>
       {" "}
-      <section className="w-[80%] h-auto mx-auto mt-8 grid grid-cols-1 lg:grid-cols-[69%_29%] gap-[2%] font-suwannaphum">
-        <div className="w-full p-2 bg-[#F5F5F5]">
-          <h3 className="text-[24px] font-semibold text-black">
-            {lesson.lesson_title}
-          </h3>
+      <section className="w-[90%] h-auto mx-auto mt-8 grid grid-cols-1 lg:grid-cols-[69%_29%] gap-[2%] font-suwannaphum">
+      <div className="w-full max-w-[950px] bg-[#F5F5F5] rounded-xl mx-auto">
+  {/* <h3 className="text-[24px] mt-10 font-semibold text-black">
+    {lesson.lesson_title}
+  </h3> */}
 
-          {/*
-           */}
-          {lesson.sections.flatMap((section) =>
-            section.contents.map(
-              (content) =>
-                content.video_url &&
-                (content.video_url.includes("youtube.com") ? (
-                  <div>
-                    <iframe
-                      className="w-full h-[500px]"
-                      src={`https://www.youtube.com/embed/${new URL(
-                        content.video_url
-                      ).searchParams.get("v")}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      title="YouTube Video"
-                    ></iframe>
-                    <div className="text-[20px] mt-5 text-center font-bold mb-5">
-                      {content.video_title || "No Title"}
-                    </div>
-                  </div>
-                ) : null)
-            )
-          )}
+  {lesson.sections.flatMap((section) =>
+    section.contents.map(
+      (content) =>
+        content.video_url &&
+        (content.video_url.includes("youtube.com") ? (
+          <div className="p-5 md:p-10 lg:p-10 mx-auto">
+            <div className="text-[18px] md:text-[20px] lg:text-[20px] text-center font-bold mb-5">
+              {content.video_title || "No Title"}
+            </div>
+            <iframe
+              className="w-full h-[400px] md:h-[400px] lg:h-[400px] rounded-md mx-auto"
+              src={`https://www.youtube.com/embed/${new URL(
+                content.video_url
+              ).searchParams.get("v")}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="YouTube Video"
+            ></iframe>
+          </div>
+        ) : null)
+    )
+  )}
 
-          {/* <h3 className="p-8 text-center text-black ">ត្រីកោណប៉ុនគ្នា</h3> */}
-        </div>
-        <div className="w-full bg-[#F5F5F5] p-5 md:p-8">
+  {/* <h3 className="p-8 text-center text-black ">ត្រីកោណប៉ុនគ្នា</h3> */}
+</div>
+
+
+        <div className=" bg-[#F5F5F5] p-5 md:p-8 rounded-lg">
           {lesson.sections.map((sections) => (
             <ul key={sections.id} className="leading-5">
               {" "}
-              <li className="text-[20px] font-medium mt-5">
+              <li className="text-lg font-bold mt-5">
                 {sections.title || "No Title"}
               </li>
             </ul>
@@ -81,9 +81,9 @@ const LessonDetail = () => {
           </ul>
         </div>
       </section>
-      <section className="mt-8 w-[80%] mx-auto h-auto bg-[#F5F5F5] p-4 font-suwannaphum">
+      <section className="mt-8 w-[90%] mx-auto h-auto bg-[#F5F5F5] p-4 font-suwannaphum rounded-lg">
         <ul>
-          <li>អំពីមេរៀន</li>
+          <li className="text-lg font-bold">អំពីមេរៀន</li>
           <li className="p-5">
             គណិតវិទ្យាថ្នាក់ទី១២ បង្រៀនដោយលោកគ្រូ ថុល ចាន់ថន ។
             នៅក្នុងវីដេអូមានលក្ខណៈកែលំហាត់ ហ្វឹកហាត់ ។

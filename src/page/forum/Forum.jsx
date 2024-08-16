@@ -37,7 +37,7 @@ const Forum = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-100">
       <ForumContent />
       {isLoading ? (
         <div className="flex justify-center items-center h-screen">

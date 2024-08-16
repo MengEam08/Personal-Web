@@ -90,72 +90,74 @@ const Lesson = () => {
 
   return (
     <>
-      <div className="ml-10 mt-5 justify-center">
-        <div className="flex flex-wrap gap-1.5">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`px-2 py-1 sm:px-3 sm:py-2 md:px-3 md:py-2 lg:px-5 lg:py-3 xl:px-6 xl:py-3 rounded-full text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[15px] font-suwannaphum gap-1 mt-5 ${
-                activeFilter === category
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200"
-              }`}
-              onClick={() => handleFilterClick(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <section
-          id="Projects"
-          className="p-10 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-5"
-        >
-          {filteredData.length > 0 ? (
-            filteredData.map((lesson) => (
-              <LessonAllCard key={lesson.id} lesson={lesson} />
-            ))
-          ) : (
-            <p>No lessons found</p>
-          )}
-        </section>
-      )}
-
-      <div className="flex justify-center mt-4">
-        <div className="bg-white p-4 flex items-center flex-wrap">
-          <button
-            className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 rounded-l-lg focus:shadow-outline hover:bg-green-100"
-            disabled={currentPage === 1 || isLoading}
-            onClick={() => handlePageChange(currentPage - 1)}
-          >
-            Prev
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (pageNumber) => (
+      <div className="bg-gray-100">
+        <div className="ml-10 justify-center">
+          <div className="flex flex-wrap gap-1.5">
+            {categories.map((category) => (
               <button
-                key={pageNumber}
-                onClick={() => handlePageChange(pageNumber)}
-                className={`px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 focus:shadow-outline ${
-                  currentPage === pageNumber ? "bg-green-100" : ""
+                key={category}
+                className={`px-2 py-1 sm:px-3 sm:py-2 md:px-3 md:py-2 lg:px-5 lg:py-3 xl:px-6 xl:py-3 rounded-full text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[15px] font-suwannaphum gap-1 mt-5 ${
+                  activeFilter === category
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
                 }`}
+                onClick={() => handleFilterClick(category)}
               >
-                {pageNumber}
+                {category}
               </button>
-            )
-          )}
-          <button
-            className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-green-600 rounded-r-lg focus:shadow-outline hover:bg-green-100"
-            disabled={currentPage === totalPages || isLoading}
-            onClick={() => handlePageChange(currentPage + 1)}
-          >
-            Next
-          </button>
+            ))}
+          </div>
         </div>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <section
+            id="Projects"
+            className="p-10 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-5"
+          >
+            {filteredData.length > 0 ? (
+              filteredData.map((lesson) => (
+                <LessonAllCard key={lesson.id} lesson={lesson} />
+              ))
+            ) : (
+              <p>No lessons found</p>
+            )}
+          </section>
+        )}
+
+        <div className="flex justify-center mt-4">
+          <div className="bg-white p-4 flex items-center flex-wrap">
+            <button
+              className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 rounded-l-lg focus:shadow-outline hover:bg-green-100"
+              disabled={currentPage === 1 || isLoading}
+              onClick={() => handlePageChange(currentPage - 1)}
+            >
+              Prev
+            </button>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageChange(pageNumber)}
+                  className={`px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-r-0 border-green-600 focus:shadow-outline ${
+                    currentPage === pageNumber ? "bg-green-100" : ""
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              )
+            )}
+            <button
+              className="px-4 py-2 text-green-600 transition-colors duration-150 bg-white border border-green-600 rounded-r-lg focus:shadow-outline hover:bg-green-100"
+              disabled={currentPage === totalPages || isLoading}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+        <FooterCard />
       </div>
-      <FooterCard />
     </>
   );
 };

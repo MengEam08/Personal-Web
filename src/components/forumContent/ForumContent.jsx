@@ -32,7 +32,7 @@ const ForumContent = () => {
                 ចួលរួមជាមួយពួកយើង​
                 អ្នកអាចធ្វើការបង្កើតសំណួរនិងធ្វើការឆ្លើយសំណួរដែលទាក់ទងនិងស្ទែម
               </span> <br />
-              <button
+              <button 
                 onClick={() => handleNavigate("/create_forum")}
                 className="mt-4 bg-white text-blue-600 px-4 py-2 rounded-lg font-suwannaphum transition-transform duration-300 hover:scale-105"
               >
