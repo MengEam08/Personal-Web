@@ -335,7 +335,7 @@ const ReplyCard = ({ forumId }) => {
             />
             <div className="w-full text-left">
               <div className="mb-2 flex flex-col sm:flex-row justify-between text-gray-600">
-                <h3 className="font-medium">{comment.author}</h3>
+                <h3 className="font-bold text-sm text-black">{comment.author}</h3>
                 <div className="text-gray-500 mt-2 sm:mt-0 sm:ml-5">
                   {new Date(comment.created_at).toLocaleString("en-US", {
                     month: "short",
@@ -348,31 +348,8 @@ const ReplyCard = ({ forumId }) => {
                 </div>
               </div>
               <p className="text-sm">{comment.content}</p>
-              <div className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between text-gray-600">
-                <button className="cursor-pointer border py-2 px-8 text-center text-xs leading-tight transition-colors duration-150 ease-in-out hover:border-gray-500 rounded-lg mb-2 sm:mb-0 sm:mr-2">
-                  Reply
-                </button>
-                <a
-                  title="Likes"
-                  href="#"
-                  className="group flex items-center justify-center sm:justify-start"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 rounded-full p-1 group-hover:bg-red-200 group-hover:text-red-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                  <span className="ml-1">12</span>
-                </a>
+              <div className=" flex flex-col sm:flex-row sm:items-center justify-between text-gray-600">
+                
               </div>
             </div>
           </div>
@@ -404,7 +381,7 @@ const ReplyCard = ({ forumId }) => {
           <textarea
             value={replyContent}
             onChange={handleReplyContentChange}
-            rows="4"
+            rows="1"
             className="w-full px-3 py-2 border rounded mb-4"
             placeholder="Write your reply..."
           />
@@ -428,3 +405,4 @@ const ReplyCard = ({ forumId }) => {
 };
 
 export default ReplyCard;
+
