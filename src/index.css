@@ -259,13 +259,13 @@ p {
   overflow: hidden;
 }
 /* Register */
-.object-cover {
+/* .object-cover {
   -o-object-fit: cover;
   object-fit: contain;
-}
+} */
 
 /* Navbar */
-.md\:h-\[60px\] {
+/* .md\:h-\[60px\] {
   width:100px;
   height: 80px !important;
-}
+} */
